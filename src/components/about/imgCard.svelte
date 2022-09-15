@@ -10,9 +10,9 @@
 	{/if}
 	<div class="w-3/5 p-16 bg-gray-50 rounded-lg shadow-md">
 		<h2 class="text-4xl font-semibold mb-4 border-b border-gray-200 pb-3">{title}</h2>
-		<p class="text-lg">
+		<div class="text-lg">
 			<slot />
-		</p>
+		</div>
 	</div>
 	{#if right}
 		<img class="w-2/6 shadow-2xl rounded-full" src={img} alt={`${title} logo`} />
