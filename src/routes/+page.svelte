@@ -14,22 +14,23 @@
 	<div class="relative flex flex-col items-center w-full">
 		<ImgCard img="/egelleeft.png" title="Egel Community"
 			><p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim vitae erat a
-				ultricies. Nam in vehicula nibh. Maecenas ornare mauris ut libero interdum, ut dignissim
-				lorem congue. Nam luctus id nisl quis feugiat. Suspendisse feugiat ex imperdiet, porttitor
-				ante sed, condimentum sapien. Integer nisi sem, facilisis sed porttitor in, porttitor et
-				velit.
+				De Egel Community is een grote vriendengroep van Egelaars, voornamelijk van het Pantarijn
+				MHV in Wageningen. We hebben we een hechte band met elkaar en houden ervan om samen feestjes
+				te houden of gewoon lekker te chillen.
+				<br />
+				Deze vriendengroep heeft een rijke geschiedenis, beginnend in de 1e klas in 2017. Door de jaren
+				heen is de groep flink gegroeid: tegenwoordig hebben we meer dan 40 leden!
 			</p></ImgCard
 		>
 		<Line />
 		<div class="background1 absolute bottom-0 h-96 w-full -z-40" />
-		<ImgCard img="/egelleeft.png" title="Egel Gamers" right
+		<ImgCard img="/egelgamers.jpg" title="Egel Gamers" right
 			><p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim vitae erat a
-				ultricies. Nam in vehicula nibh. Maecenas ornare mauris ut libero interdum, ut dignissim
-				lorem congue. Nam luctus id nisl quis feugiat. Suspendisse feugiat ex imperdiet, porttitor
-				ante sed, condimentum sapien. Integer nisi sem, facilisis sed porttitor in, porttitor et
-				velit.
+				Een groot deel van de Egel Community bestaat uit gamers. De meesten hiervan komen uit de
+				groep originele Egelaars uit de 1e klas. Samen spelen we games als CS:GO, Minecraft, Hearts
+				of Iron 4 en SCP SL.
+				<br />
+				We houden vaak vriendelijke toernooien of spelen 's avonds gezellig samen.
 			</p></ImgCard
 		>
 	</div>
@@ -45,8 +46,9 @@
 					De Egel Community heeft ook een Discord server! Hier kunt u de online leden van de server
 					zien. Interesse om deel te nemen? Neem contact op met: egelblad@gmail.com.
 					<br /><br />
-					De Discord server is ons hoofdkwartier, hier worden al onze snode plannen gesmeed. We zijn
-					constant bezig u te scam- eh, uw ervaring te verbeteren natuurlijk.
+					De Discord server is ons hoofdkwartier, hier worden al onze snode plannen gesmeed. Hier spelen
+					we onze favoriete games en houden we gezellige gesprekken. Het is dé online hangplek voor de
+					Egel Community!
 				</p>
 			</div>
 			<iframe
@@ -104,7 +106,11 @@
 		<p>
 			Naast developers hebben we ook creatief talent! Deze leden hebben stukken gecomponeerd en
 			geremixt als
-			<Link title="Kernenergie" url="https://www.youtube.com/watch?v=4jdLJ1bIPGY" blank />,
+			<Link
+				title="Kernenergie"
+				url="https://open.spotify.com/track/7yDWbmBBHzy2CWFRojeTbn?si=99e282145268426c"
+				blank
+			/>,
 			<Link title="J.O.R.N.A" url="https://www.youtube.com/watch?v=MalS05AYzxo" blank />,
 			<Link title="Gnoerks OST" url="https://www.youtube.com/watch?v=15wC98k9ujo" blank />,
 			<Link title="Joep Remix" url="https://www.youtube.com/watch?v=ikWX_cCDaSU" blank />

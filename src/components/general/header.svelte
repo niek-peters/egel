@@ -1,5 +1,5 @@
-<header class="flex w-1/3 items-center justify-between my-4 z-10 text-white">
-	<h1 class="text-3xl font-bold"><a href="/">Egel</a></h1>
+<header class="flex w-2/5 items-center justify-between my-4 z-10 text-white">
+	<h1 class="w-16 text-3xl font-bold"><a href="/">Egel</a></h1>
 	<nav class="font-semibold text-lg">
 		<a
 			class="mx-4 border-b border-transparent hover:text-gray-200 hover:border-gray-200 transition"
@@ -14,6 +14,9 @@
 			href="/online">Online</a
 		>
 	</nav>
+	<h1 class="w-16 text-xl font-bold">
+		<a href="https://github.com/MrValk/egel" target="_blank">&lt;/code&gt;</a>
+	</h1>
 </header>
 <div class="absolute w-full h-96 -z-10" />
 
