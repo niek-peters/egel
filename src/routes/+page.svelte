@@ -2,6 +2,11 @@
 	import ImgCard from '../components/about/imgCard.svelte';
 	import FullCard from '../components/about/fullCard.svelte';
 	import Line from '../components/general/line.svelte';
+
+	import SquareImg from '../components/about/squareImg.svelte';
+	import Link from '../components/general/link.svelte';
+
+	import TeamCard from '../components/about/teamCard.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -58,149 +63,66 @@
 		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
 	</div>
 	<!-- Developer team card -->
-	<div class="flex flex-col items-center w-full">
-		<FullCard title="Egel Developers">
-			<p>
-				Binnen de Egel Community hebben we ook ons eigen developer team! Makers van <a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://niek.coderschool.eu/">Egelblad</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://dev.egelbank.nl/">Egelbank</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://github.com/Egel-Developers/egel-mods-installer">Egel Mods Installer</a
-				>, deze website en nog veel meer!
-			</p>
-			<div class="flex justify-between mt-8">
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">MeneerValk</p>
-					<img
-						class="aspect-square w-full rounded-md"
-						src="/meneervalk.png"
-						alt="MeneerValk profielfoto"
-					/>
-				</div>
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">Milanutje</p>
-					<img
-						class="aspect-square w-full rounded-md"
-						src="/milanutje.png"
-						alt="Milanutje profielfoto"
-					/>
-				</div>
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">Motrix</p>
-					<img class="aspect-square w-full rounded-md" src="/motrix.png" alt="Motrix profielfoto" />
-				</div>
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">Goeloes</p>
-					<img
-						class="aspect-square w-full rounded-md"
-						src="/goeloes.png"
-						alt="Goeloes profielfoto"
-					/>
-				</div>
-			</div>
-		</FullCard>
-	</div>
+	<TeamCard
+		title="Egel Developers"
+		title1="MeneerValk"
+		title2="Milanutje"
+		title3="Motrix"
+		title4="Goeloes"
+		img1="/meneervalk.png"
+		img2="/milanutje.png"
+		img3="/motrix.png"
+		img4="/goeloes.png"
+	>
+		<p>
+			Binnen de Egel Community hebben we ook ons eigen developer team! Makers van
+			<Link title="Egelblad" url="https://niek.coderschool.eu/" blank />, <Link
+				title="Egelbank"
+				url="https://dev.egelbank.nl/"
+				blank
+			/>, <Link
+				title="Egel Mods Installer"
+				url="https://github.com/Egel-Developers/egel-mods-installer"
+				blank
+			/>, deze website en nog veel meer!
+		</p>
+	</TeamCard>
+
 	<Line />
 	<!-- Creators card -->
-	<div class="flex flex-col items-center w-full">
-		<FullCard title="Egel Creators">
-			<p>
-				Naast developers hebben we ook creatief talent! Deze leden hebben stukken gecomponeerd en
-				geremixt als <a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=4jdLJ1bIPGY">Kernenergie</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=MalS05AYzxo">J.O.R.N.A</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=15wC98k9ujo">Gnoerks OST</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=ikWX_cCDaSU">Joep Remix</a
-				>
-				en
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=dD1tov0H8cM">Meindert Remix</a
-				>. Naast muziek zijn er ook video's gemaakt als
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=7HBZ_6j4maY">Ceaseless</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=mT2yGQxk-lY">Buurman en Buurman</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=5m8TZo3jPYo">Compromised Trailer</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=pi84ZXaCgHk">De Achterblijvers</a
-				>,
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=r2rns2vXI80">Egel Nieuws</a
-				>
-				en
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					target="_blank"
-					href="https://www.youtube.com/watch?v=7hTUwwgzHE8">SCP-SL Compilations</a
-				>. Ten slotte ook nog
-				<a
-					class="text-purple-500 hover:text-purple-700 border-b border-transparent hover:border-purple-700 transition"
-					href="/kunst">mooie kunst van Labrat</a
-				>.
-			</p>
-			<div class="flex justify-between mt-8">
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">Wouter van der Ven</p>
-					<img class="aspect-square w-full rounded-md" src="/wouter.png" alt="Wouter profielfoto" />
-				</div>
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">Milanutje</p>
-					<img
-						class="aspect-square w-full rounded-md"
-						src="/milanutje.png"
-						alt="Milanutje profielfoto"
-					/>
-				</div>
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">Motrix</p>
-					<img class="aspect-square w-full rounded-md" src="/motrix.png" alt="Motrix profielfoto" />
-				</div>
-				<div class="flex flex-col items-center w-1/5">
-					<p class="text-xl font-semibold mb-2">Labrat</p>
-					<img class="aspect-square w-full rounded-md" src="/kunst3.jpg" alt="Labrat profielfoto" />
-				</div>
-			</div>
-		</FullCard>
-	</div>
+	<TeamCard
+		title="Egel Creators"
+		title1="Wouter van der Ven"
+		title2="Milanutje"
+		title3="Motrix"
+		title4="Labrat"
+		img1="/wouter.png"
+		img2="/milanutje.png"
+		img3="/motrix.png"
+		img4="/kunst3.jpg"
+	>
+		<p>
+			Naast developers hebben we ook creatief talent! Deze leden hebben stukken gecomponeerd en
+			geremixt als
+			<Link title="Kernenergie" url="https://www.youtube.com/watch?v=4jdLJ1bIPGY" blank />,
+			<Link title="J.O.R.N.A" url="https://www.youtube.com/watch?v=MalS05AYzxo" blank />,
+			<Link title="Gnoerks OST" url="https://www.youtube.com/watch?v=15wC98k9ujo" blank />,
+			<Link title="Joep Remix" url="https://www.youtube.com/watch?v=ikWX_cCDaSU" blank />
+			en
+			<Link title="Meindert Remix" url="https://www.youtube.com/watch?v=dD1tov0H8cM" blank />
+			. Naast muziek zijn er ook video's gemaakt als
+			<Link title="Ceaseless" url="https://www.youtube.com/watch?v=7HBZ_6j4maY" blank />,
+			<Link title="Buurman en Buurman" url="https://www.youtube.com/watch?v=mT2yGQxk-lY" blank />,
+			<Link title="Compromised Trailer" url="https://www.youtube.com/watch?v=5m8TZo3jPYo" blank />,
+			<Link title="De Achterblijvers" url="https://www.youtube.com/watch?v=pi84ZXaCgHk" blank />,
+			<Link title="Egel Nieuws" url="https://www.youtube.com/watch?v=r2rns2vXI80" blank />
+
+			en
+			<Link title="SCP-SL Compilations" url="https://www.youtube.com/watch?v=7hTUwwgzHE8" blank />
+			. Ten slotte ook nog
+			<Link title="mooie kunst van Labrat" url="/kunst" />.
+		</p>
+	</TeamCard>
 </main>
 
 <style>
