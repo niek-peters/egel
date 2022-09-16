@@ -18,10 +18,31 @@
 		<a href="https://github.com/MrValk/egel" target="_blank">&lt;/code&gt;</a>
 	</h1>
 </header>
-<div class="absolute w-full h-96 -z-10" />
+<div class="absolute w-full -z-10" />
 
-<style>
-	div {
+<style lang="scss">
+	/* div {
+		height: 48rem;
 		background-image: -webkit-linear-gradient(95deg, white 50%, rgb(168 85 247) 50.3%);
+	} */
+
+	div {
+		height: 32rem;
+		background-image: url('/bg-1.svg');
+		background-size: cover;
+		background-position: center;
+		z-index: -60;
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: -6rem;
+			left: -4rem;
+			height: 14rem;
+			width: 110%;
+			background: white;
+			transform: rotate(-5deg);
+			z-index: -50;
+		}
 	}
 </style>

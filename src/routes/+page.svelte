@@ -12,9 +12,9 @@
 
 <main class="flex flex-col items-center w-full">
 	<!-- Introduction -->
-	<article class="relative flex justify-between w-3/5 my-12">
+	<article class="relative flex justify-between w-3/5 mt-36 mb-12">
 		<div class="w-2/3">
-			<h1 class="text-9xl font-semibold my-8">Wij zijn Egel</h1>
+			<h1 class="text-9xl font-semibold mt-8 mb-16">Wij zijn Egel</h1>
 			<p class="text-4xl mb-6">
 				Op deze website vindt u wie wij zijn, wat wij doen en wat wij hebben meegemaakt
 			</p>
@@ -29,7 +29,7 @@
 					class="flex justify-center items-center w-fit text-xl text-white bg-gray-700 hover:bg-gray-800 transition rounded-full py-1 px-4 m-2"
 					href="/"
 				>
-					<Fa class="mr-3" icon={faHourglass} /> Tijdlijn
+					<Fa class="mr-3" icon={faHourglass} /> Tijdbalk
 				</a>
 			</div>
 		</div>
