@@ -1,5 +1,5 @@
 <script>
-	import FullCard from '../../components/about/fullCard.svelte';
+	import FullCard from '../../../components/about/fullCard.svelte';
 </script>
 
 <FullCard title="Kunst">
