@@ -1,7 +1,7 @@
-<div class="relative w-full flex justify-center">
+<div class="relative w-full flex justify-center mt-auto">
 	<div class="bg absolute bottom-0 w-full -z-10" />
 	<footer class="flex w-1/3 justify-center mb-12 z-10 text-white">
-		<h3>
+		<h3 class="text-lg">
 			Copyright &copy; | <a
 				class="border-b hover:text-gray-300 hover:border-gray-300 transition"
 				href="https://github.com/Egel-Developers"
