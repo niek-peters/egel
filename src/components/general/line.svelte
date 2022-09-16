@@ -2,4 +2,4 @@
 	export let color: string = 'bg-gray-100';
 </script>
 
-<div class={`w-2/3 h-px ${color} my-8`} />
+<div class={`2xl:w-2/3 sm:w-4/5 h-px ${color} my-8`} />

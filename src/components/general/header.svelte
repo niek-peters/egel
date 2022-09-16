@@ -1,4 +1,4 @@
-<header class="flex w-2/5 items-center justify-between my-4 z-10 text-white">
+<header class="flex sm:w-3/5 mxl:w-2/5 items-center justify-between my-4 z-10 text-white">
 	<h1 class="w-16 text-3xl font-bold"><a href="/">Egel</a></h1>
 	<nav class="font-semibold text-lg">
 		<a
@@ -18,7 +18,7 @@
 		<a href="https://github.com/MrValk/egel" target="_blank">&lt;/code&gt;</a>
 	</h1>
 </header>
-<div class="absolute w-full -z-10" />
+<div class="absolute w-full" />
 
 <style lang="scss">
 	/* div {
@@ -27,7 +27,7 @@
 	} */
 
 	div {
-		height: 32rem;
+		height: 64vh;
 		background-image: url('/bg-1.svg');
 		background-size: cover;
 		background-position: center;
@@ -36,13 +36,13 @@
 		&:after {
 			content: '';
 			position: absolute;
-			bottom: -6rem;
-			left: -4rem;
-			height: 14rem;
+			bottom: -10vh;
+			left: -10vh;
+			height: 26vh;
 			width: 110%;
 			background: white;
 			transform: rotate(-5deg);
-			z-index: -50;
+			z-index: -40;
 		}
 	}
 </style>

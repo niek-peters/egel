@@ -4,7 +4,7 @@
 	export let right: boolean = false;
 </script>
 
-<article class="flex justify-between my-12 w-3/5 items-center h-96">
+<article class="flex justify-between my-12 2xl:w-3/5 sm:w-4/5 items-center h-96">
 	{#if !right}
 		<img class="w-2/6 shadow-2xl rounded-full" src={img} alt={`${title} logo`} />
 	{/if}
