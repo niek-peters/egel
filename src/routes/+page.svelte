@@ -1,9 +1,10 @@
 <script>
+	import Fa from 'svelte-fa';
+	import { faNewspaper, faHourglass } from '@fortawesome/free-regular-svg-icons';
+
 	import ImgCard from '../components/about/imgCard.svelte';
-	import FullCard from '../components/about/fullCard.svelte';
 	import Line from '../components/general/line.svelte';
 
-	import SquareImg from '../components/about/squareImg.svelte';
 	import Link from '../components/general/link.svelte';
 
 	import TeamCard from '../components/about/teamCard.svelte';
@@ -11,6 +12,35 @@
 
 <main class="flex flex-col items-center w-full">
 	<!-- Introduction -->
+	<article class="relative flex justify-between w-3/5 my-12">
+		<div class="w-2/3">
+			<h1 class="text-9xl font-semibold my-8">Wij zijn Egel</h1>
+			<p class="text-4xl mb-6">
+				Op deze website vindt u wie wij zijn, wat wij doen en wat wij hebben meegemaakt
+			</p>
+			<div class="flex justify-center w-fit">
+				<a
+					class="flex justify-center items-center w-fit text-xl text-white bg-gray-700 hover:bg-gray-800 transition rounded-full py-1 px-4 m-2"
+					href="/"
+				>
+					<Fa class="mr-3" icon={faNewspaper} /> Nieuws
+				</a>
+				<a
+					class="flex justify-center items-center w-fit text-xl text-white bg-gray-700 hover:bg-gray-800 transition rounded-full py-1 px-4 m-2"
+					href="/"
+				>
+					<Fa class="mr-3" icon={faHourglass} /> Tijdlijn
+				</a>
+			</div>
+		</div>
+		<img
+			class="absolute left-2/3 w-1/3 aspect-square rounded-lg shadow-2xl"
+			src="egelleeft.png"
+			alt="Egel foto"
+		/>
+	</article>
+	<Line />
+	<!-- Community and Gamers -->
 	<div class="relative flex flex-col items-center w-full">
 		<ImgCard img="/egelleeft.png" title="Egel Community"
 			><p>
@@ -28,7 +58,7 @@
 			><p>
 				Een groot deel van de Egel Community bestaat uit gamers. De meesten hiervan komen uit de
 				groep originele Egelaars uit de 1e klas. Samen spelen we games als CS:GO, Minecraft, Hearts
-				of Iron 4 en SCP SL.
+				of Iron 4 en SCP Secret Laboratory.
 				<br />
 				We houden vaak vriendelijke toernooien of spelen 's avonds gezellig samen.
 			</p></ImgCard
