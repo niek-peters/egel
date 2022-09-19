@@ -17,3 +17,9 @@
 		{/if}
 	</div>
 </article>
+
+<style>
+	article {
+		height: 34rem;
+	}
+</style>

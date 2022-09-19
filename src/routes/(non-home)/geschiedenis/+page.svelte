@@ -73,10 +73,6 @@
 			transform: scaleX(-1);
 		}
 
-		article {
-			height: 34rem;
-		}
-
 		/* width */
 		&::-webkit-scrollbar {
 			width: 1rem;
