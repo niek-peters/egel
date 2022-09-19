@@ -29,7 +29,7 @@
 	} */
 
 	.background {
-		height: 40vh;
+		height: 36vh;
 		background-image: url('/bg-1.svg');
 		background-size: cover;
 		background-position: center;

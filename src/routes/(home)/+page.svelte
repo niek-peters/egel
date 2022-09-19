@@ -3,12 +3,12 @@
 	import { faNewspaper, faHourglass, faUser } from '@fortawesome/free-regular-svg-icons';
 	import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-	import ImgCard from '../../components/about/imgCard.svelte';
+	import ImgCard from '../../components/general/imgCard.svelte';
 	import Line from '../../components/general/line.svelte';
 
 	import Link from '../../components/general/link.svelte';
 
-	import TeamCard from '../../components/about/teamCard.svelte';
+	import TeamCard from '../../components/general/teamCard.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">

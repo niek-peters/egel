@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FullCard from '../about/fullCard.svelte';
+	import FullCard from '../general/fullCard.svelte';
 	import SquareImg from '../about/squareImg.svelte';
 
 	export let title: string = 'Egelaars';
