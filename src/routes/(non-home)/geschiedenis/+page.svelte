@@ -112,10 +112,6 @@
 </main>
 
 <style lang="scss">
-	.timeline {
-		height: 34rem;
-	}
-
 	.background1 {
 		background-image: -webkit-linear-gradient(95deg, rgb(229 231 235) 50%, white 50.3%);
 	}
