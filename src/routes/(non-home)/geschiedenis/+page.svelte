@@ -7,6 +7,7 @@
 	import TeamCard from '../../../components/general/teamCard.svelte';
 
 	import ImgButton from '../../../components/history/imgButton.svelte';
+	import TimeLabel from '../../../components/history/timeLabel.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -34,14 +35,24 @@
 	<div style="margin-bottom: 84vh;" />
 	<Line />
 	<div class="2xl:w-3/5 sm:w-4/5 my-12">
-		<h2 class="w-full text-4xl font-semibold mb-4 border-b border-gray-300 pb-3">Tijdlijn</h2>
+		<div class="w-full my-4">
+			<ul class="flex justify-between my-2 text-lg font-semibold">
+				<TimeLabel time="2017" />
+				<TimeLabel time="2018" />
+				<TimeLabel time="2019" />
+				<TimeLabel time="2020" />
+				<TimeLabel time="2021" />
+				<TimeLabel time="2022" />
+			</ul>
+			<input
+				type="range"
+				class="slider w-full h-6 appearance-none outline-none opacity-80 rounded-lg overflow-hidden"
+			/>
+		</div>
 		<div
 			class="timeline overflow-y-auto flex flex-col justify-between w-full bg-gray-100 rounded-lg shadow-md"
 		>
 			<div class="inner">
-				<Entry img="/egelleeft.png" />
-				<Entry img="/egelleeft.png" />
-				<Entry img="/egelleeft.png" />
 				<Entry img="/egelleeft.png" />
 			</div>
 		</div>
@@ -123,6 +134,18 @@
 </main>
 
 <style lang="scss">
+	.slider {
+		background: linear-gradient(to right, magenta, rgb(65, 10, 154));
+
+		&::-webkit-slider-thumb {
+			appearance: none;
+			width: 0.5rem;
+			height: 1.5rem;
+			background: black;
+			cursor: pointer;
+		}
+	}
+
 	.timeline {
 		height: 34rem;
 
