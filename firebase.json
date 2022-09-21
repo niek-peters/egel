@@ -2,6 +2,14 @@
 	"hosting": {
 		"site": "egel",
 		"public": "build",
-		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+		"appAssociation": "AUTO",
+		"cleanUrls": true,
+		"rewrites": [
+			{
+				"source": "/**",
+				"dynamicLinks": true
+			}
+		]
 	}
 }
