@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let date: string = '13 September 2022';
 	export let title: string = 'Bogdan wordt eindelijk 10';
-	export let text: string = 'BLYATTTTTTTTTTTTTTTTTTT';
+	export let description: string = 'BLYATTTTTTTTTTTTTTTTTTT';
 	export let img: string | undefined;
 </script>
 
@@ -10,7 +10,7 @@
 	<div class="flex justify-between">
 		<div>
 			<h4 class="text-xl font-semibold mb-4">{title}</h4>
-			<p>{text}</p>
+			<p>{description}</p>
 		</div>
 		{#if img}
 			<img class="rounded-lg w-1/3 max-h-full" src={img} alt="blyaat" />

@@ -12,7 +12,7 @@
 			width: 1px;
 			height: 2rem;
 			top: 2rem;
-			background: black;
+			background: rgb(0, 0, 0);
 			z-index: 20;
 		}
 	}

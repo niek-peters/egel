@@ -7,7 +7,7 @@
 	import TeamCard from '../../../components/general/teamCard.svelte';
 
 	import ImgButton from '../../../components/history/imgButton.svelte';
-	import TimeLabel from '../../../components/history/timeLabel.svelte';
+	import Timeline from '../../../components/history/timeline.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -34,29 +34,7 @@
 	</div>
 	<div style="margin-bottom: 84vh;" />
 	<Line />
-	<div class="2xl:w-3/5 sm:w-4/5 my-12">
-		<div class="w-full my-4">
-			<ul class="flex justify-between my-2 text-lg font-semibold">
-				<TimeLabel time="2017" />
-				<TimeLabel time="2018" />
-				<TimeLabel time="2019" />
-				<TimeLabel time="2020" />
-				<TimeLabel time="2021" />
-				<TimeLabel time="2022" />
-			</ul>
-			<input
-				type="range"
-				class="slider w-full h-6 appearance-none outline-none opacity-80 rounded-lg overflow-hidden"
-			/>
-		</div>
-		<div
-			class="timeline overflow-y-auto flex flex-col justify-between w-full bg-gray-100 rounded-lg shadow-md"
-		>
-			<div class="inner">
-				<Entry img="/egelleeft.png" />
-			</div>
-		</div>
-	</div>
+	<Timeline />
 	<div class="flex flex-col items-center relative w-full my-12 bg-gray-200">
 		<Line color="bg-gray-300" />
 		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
@@ -134,48 +112,8 @@
 </main>
 
 <style lang="scss">
-	.slider {
-		background: linear-gradient(to right, magenta, rgb(65, 10, 154));
-
-		&::-webkit-slider-thumb {
-			appearance: none;
-			width: 0.5rem;
-			height: 1.5rem;
-			background: black;
-			cursor: pointer;
-		}
-	}
-
 	.timeline {
 		height: 34rem;
-
-		transform: scaleX(-1);
-
-		.inner {
-			transform: scaleX(-1);
-		}
-
-		/* width */
-		&::-webkit-scrollbar {
-			width: 1rem;
-		}
-
-		/* Track */
-		&::-webkit-scrollbar-track {
-			background: linear-gradient(magenta, rgb(65, 10, 154));
-			border-radius: 0 0.5rem 0.5rem 0;
-		}
-
-		/* Handle */
-		&::-webkit-scrollbar-thumb {
-			background: rgba(255, 255, 255, 0.25);
-			border-radius: 0 0.5rem 0.5rem 0;
-		}
-
-		/* Handle on hover */
-		&::-webkit-scrollbar-thumb:hover {
-			background: rgba(255, 255, 255, 0.4);
-		}
 	}
 
 	.background1 {
