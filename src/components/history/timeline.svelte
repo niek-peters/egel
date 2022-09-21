@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { getHistory } from '../../database/history';
 
 	import TimeLabel from './timeLabel.svelte';
 	import Entry from './entry.svelte';
@@ -7,59 +8,68 @@
 	import type { Event } from '../../models/event';
 	import { formatDate } from '../../models/event';
 
-	onMount(focusSlider);
+	onMount(() => {
+		focusSlider();
+	});
 
 	function focusSlider() {
 		slider.focus({ preventScroll: true });
 	}
 
+	let events: Event[] = [];
+
 	// Temporary events in memory
 	// TODO: Replace with Firestore database read
+	async function displayHistory() {
+		events = (await getHistory()) as Event[];
+		console.log(events);
+	}
+	displayHistory();
 
-	const events: Event[] = [
-		{
-			title: 'Bogdan wordt eindelijk 10',
-			date: new Date().toISOString(),
-			description: 'BLYATTTTTTTTTTTTTTTTTTT',
-			img: '/egelleeft.png'
-		},
-		{
-			title: 'Bogdan wordt eindelijk 11',
-			date: new Date().toISOString(),
-			description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-			img: '/bogdan.jpg'
-		},
-		{
-			title: 'Bogdan wordt eindelijk 12',
-			date: new Date().toISOString(),
-			description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-			img: '/bogdan.jpg'
-		},
-		{
-			title: 'Bogdan wordt eindelijk 13',
-			date: new Date().toISOString(),
-			description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-			img: '/bogdan.jpg'
-		},
-		{
-			title: 'Bogdan wordt eindelijk 14',
-			date: new Date().toISOString(),
-			description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-			img: '/bogdan.jpg'
-		},
-		{
-			title: 'Bogdan wordt eindelijk 15',
-			date: new Date().toISOString(),
-			description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-			img: '/bogdan.jpg'
-		},
-		{
-			title: 'Bogdan wordt eindelijk 16',
-			date: new Date().toISOString(),
-			description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-			img: '/bogdan.jpg'
-		}
-	];
+	// const events: Event[] = [
+	// 	{
+	// 		title: 'Bogdan wordt eindelijk 10',
+	// 		date: new Date().toISOString(),
+	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT',
+	// 		img: '/egelleeft.png'
+	// 	},
+	// 	{
+	// 		title: 'Bogdan wordt eindelijk 11',
+	// 		date: new Date().toISOString(),
+	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
+	// 		img: '/bogdan.jpg'
+	// 	},
+	// 	{
+	// 		title: 'Bogdan wordt eindelijk 12',
+	// 		date: new Date().toISOString(),
+	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
+	// 		img: '/bogdan.jpg'
+	// 	},
+	// 	{
+	// 		title: 'Bogdan wordt eindelijk 13',
+	// 		date: new Date().toISOString(),
+	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
+	// 		img: '/bogdan.jpg'
+	// 	},
+	// 	{
+	// 		title: 'Bogdan wordt eindelijk 14',
+	// 		date: new Date().toISOString(),
+	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
+	// 		img: '/bogdan.jpg'
+	// 	},
+	// 	{
+	// 		title: 'Bogdan wordt eindelijk 15',
+	// 		date: new Date().toISOString(),
+	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
+	// 		img: '/bogdan.jpg'
+	// 	},
+	// 	{
+	// 		title: 'Bogdan wordt eindelijk 16',
+	// 		date: new Date().toISOString(),
+	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
+	// 		img: '/bogdan.jpg'
+	// 	}
+	// ];
 
 	let sliderPos = 0;
 	let slider: HTMLInputElement;
@@ -87,14 +97,14 @@
 	<div
 		class="timeline overflow-y-auto flex flex-col justify-between w-full bg-gray-100 rounded-lg shadow-md"
 	>
-		<div class="inner">
+		{#if events[0] && events[0].title}
 			<Entry
 				title={events[sliderPos].title}
 				date={formatDate(events[sliderPos].date)}
 				description={events[sliderPos].description}
 				img={events[sliderPos].img}
 			/>
-		</div>
+		{/if}
 	</div>
 </div>
 

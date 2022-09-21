@@ -3,7 +3,6 @@
 	import { faHourglass } from '@fortawesome/free-regular-svg-icons';
 
 	import Line from '../../../components/general/line.svelte';
-	import Entry from '../../../components/history/entry.svelte';
 	import TeamCard from '../../../components/general/teamCard.svelte';
 
 	import ImgButton from '../../../components/history/imgButton.svelte';

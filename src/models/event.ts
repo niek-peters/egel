@@ -1,13 +1,15 @@
+import type { Timestamp } from 'firebase/firestore';
+
 export type Event = {
 	title: string;
-	date: string;
+	date: Timestamp;
 	description: string;
 	img: string;
 };
 
 // Date is in format YYYY-MM-DD, we convert it to DD
-export function formatDate(dateString: string) {
-	const date = new Date(dateString);
+export function formatDate(timestamp: Timestamp) {
+	const date = timestamp.toDate();
 
 	const monthNames = [
 		'Januari',
