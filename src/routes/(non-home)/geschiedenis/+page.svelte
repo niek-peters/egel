@@ -21,7 +21,7 @@
 					veel gebeurd.
 					<br />
 					Deze pagina is er om ons de mogelijkheid te geven onze belangrijke momenten op te slaan, zodat
-					ze nooit vergeten worden. Hier staan ze allemaal op een rijtje in een interactieve tijdlijn
+					ze nooit vergeten worden. Hier staan ze allemaal op een rijtje in een interactieve tijdlijn.
 				</p>
 			</div>
 			<Fa
