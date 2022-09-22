@@ -7,6 +7,8 @@
 
 	import type { Event } from '../../models/event';
 	import { formatDate } from '../../models/event';
+	import { Timestamp } from 'firebase/firestore';
+	import { now } from 'svelte/internal';
 
 	onMount(() => {
 		focusSlider();
@@ -22,54 +24,8 @@
 	// TODO: Replace with Firestore database read
 	async function displayHistory() {
 		events = (await getHistory()) as Event[];
-		console.log(events);
 	}
 	displayHistory();
-
-	// const events: Event[] = [
-	// 	{
-	// 		title: 'Bogdan wordt eindelijk 10',
-	// 		date: new Date().toISOString(),
-	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT',
-	// 		img: '/egelleeft.png'
-	// 	},
-	// 	{
-	// 		title: 'Bogdan wordt eindelijk 11',
-	// 		date: new Date().toISOString(),
-	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-	// 		img: '/bogdan.jpg'
-	// 	},
-	// 	{
-	// 		title: 'Bogdan wordt eindelijk 12',
-	// 		date: new Date().toISOString(),
-	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-	// 		img: '/bogdan.jpg'
-	// 	},
-	// 	{
-	// 		title: 'Bogdan wordt eindelijk 13',
-	// 		date: new Date().toISOString(),
-	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-	// 		img: '/bogdan.jpg'
-	// 	},
-	// 	{
-	// 		title: 'Bogdan wordt eindelijk 14',
-	// 		date: new Date().toISOString(),
-	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-	// 		img: '/bogdan.jpg'
-	// 	},
-	// 	{
-	// 		title: 'Bogdan wordt eindelijk 15',
-	// 		date: new Date().toISOString(),
-	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-	// 		img: '/bogdan.jpg'
-	// 	},
-	// 	{
-	// 		title: 'Bogdan wordt eindelijk 16',
-	// 		date: new Date().toISOString(),
-	// 		description: 'BLYATTTTTTTTTTTTTTTTTTT 2',
-	// 		img: '/bogdan.jpg'
-	// 	}
-	// ];
 
 	let sliderPos = 0;
 	let slider: HTMLInputElement;
@@ -103,6 +59,13 @@
 				date={formatDate(events[sliderPos].date)}
 				description={events[sliderPos].description}
 				img={events[sliderPos].img}
+			/>
+		{:else}
+			<Entry
+				title="Er zijn nog geen evenementen toegevoegd!"
+				date={formatDate(Timestamp.now())}
+				description="Verstuur een evenement met het formulier hieronder. We zullen het zo snel mogelijk controleren en toevoegen."
+				img="/egelleeft.png"
 			/>
 		{/if}
 	</div>
