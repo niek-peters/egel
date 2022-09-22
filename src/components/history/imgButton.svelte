@@ -3,7 +3,7 @@
 	import Fa from 'svelte-fa';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-	import { setImg } from '../../stores/imgStore';
+	import { setImg, imgStore } from '../../stores/imgStore';
 
 	// @ts-ignore
 	import cropImage from '../../scripts/cropImage';
@@ -42,15 +42,12 @@
 
 				cropImage(ctx, img, 0, 0, canvas.width, canvas.height);
 
-				imgUrl = ctx.canvas.toDataURL('image/jpg');
-
 				// console.log(imgUrl);
-				setImg(imgUrl);
+				setImg(ctx.canvas.toDataURL('image/jpg'));
 			};
 		};
 	}
 
-	export let imgUrl: string = '';
 	let imgInput: HTMLInputElement;
 </script>
 
@@ -60,7 +57,7 @@
 		id="image"
 		type="button"
 		class={`img-button flex outline-none items-center justify-center relative rounded-lg bg-purple-400 ${
-			imgUrl ? '' : 'hover:bg-purple-500'
+			$imgStore ? '' : 'hover:bg-purple-500'
 		} transition mb-2`}
 		on:click={() => imgInput.click()}
 	>
@@ -71,8 +68,12 @@
 			bind:this={imgInput}
 			on:change={updateImgPreview}
 		/>
-		{#if imgUrl}
-			<img src={imgUrl} alt="card img" class="rounded-lg overflow-hidden object-cover" />
+		{#if $imgStore}
+			<img
+				src={$imgStore}
+				alt="Event representation"
+				class="rounded-lg overflow-hidden object-cover"
+			/>
 		{:else}
 			<Fa icon={faPlus} class="text-7xl" />
 		{/if}

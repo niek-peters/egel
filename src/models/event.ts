@@ -26,5 +26,5 @@ export function formatDate(timestamp: Timestamp) {
 		'December'
 	];
 
-	return date.getDate() + ' ' + monthNames[date.getMonth() - 1] + ' ' + date.getFullYear();
+	return date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
 }

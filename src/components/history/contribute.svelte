@@ -1,34 +1,30 @@
 <script lang="ts">
-	import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
-	import { ulid } from 'ulid';
-	import { db } from '../../scripts/firebaseInit';
-	import { doc, setDoc, getFirestore, Timestamp } from 'firebase/firestore';
-	import { authStore } from '../../stores/auth';
+	import { addHistory } from '../../database/history';
 
 	import ImgButton from './imgButton.svelte';
-	import { imgStore } from '../../stores/imgStore';
+	import { imgStore, setImg } from '../../stores/imgStore';
 
 	async function submitHistory() {
-		const user = $authStore.user;
-		if (!$imgStore || !user || !user.uid) return;
+		// If we are missing data, don't submit it
+		if (!title || !description || !date || !$imgStore) {
+			success = '';
+			error = 'Vul alle velden in!';
+			setTimeout(() => (error = ''), 2000);
+			return;
+		}
 
-		const storage = getStorage();
-		const storageRef = ref(storage, `history/${ulid()}`);
-
-		const firestore = getFirestore();
-		const documentRef = doc(firestore, 'History', ulid());
-
-		await uploadString(storageRef, $imgStore, 'data_url');
-
-		const url = await getDownloadURL(storageRef);
-
-		await setDoc(documentRef, {
-			title: title,
-			description: description,
-			date: Timestamp.fromDate(date),
-			img: url
-		});
+		addHistory(title, description, date, $imgStore);
+		error = '';
+		success = 'Bijdrage ingediend!';
+		setTimeout(() => {
+			success = title = description = '';
+			date = new Date();
+			setImg('');
+		}, 1000);
 	}
+
+	let error: string = '';
+	let success: string = '';
 
 	let title: string = '';
 	let description: string = '';
@@ -51,7 +47,7 @@
 		</p>
 	</article>
 	<form class="flex justify-between" on:submit|preventDefault={submitHistory}>
-		<div class="w-1/3 mr-8">
+		<div class="relative w-1/3 mr-8">
 			<label for="title" class="block text-lg font-semibold mb-2">Titel</label>
 			<input
 				type="text"
@@ -82,8 +78,30 @@
 			>
 				Verstuur
 			</button>
+
+			<div
+				class={`absolute w-full font-lg bg-red-400 border-2 border-red-500 text-white mt-4 rounded-lg p-2 ${
+					error ? '' : 'opacity-0'
+				} transition`}
+			>
+				{error}
+			</div>
+
+			<div
+				class={`absolute w-full font-lg bg-green-400 border-2 border-green-500 text-white mt-4 rounded-lg p-2 ${
+					success ? '' : 'opacity-0'
+				} transition`}
+			>
+				{success}
+			</div>
 		</div>
 
 		<ImgButton />
 	</form>
 </div>
+
+<style lang="scss">
+	.popup {
+		height: inherit;
+	}
+</style>
