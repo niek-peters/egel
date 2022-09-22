@@ -16,13 +16,13 @@
 		const storageRef = ref(storage, `history/${ulid()}`);
 
 		const firestore = getFirestore();
-		const firestoreRef = doc(firestore, 'History', ulid());
+		const documentRef = doc(firestore, 'History', ulid());
 
 		await uploadString(storageRef, $imgStore, 'data_url');
 
 		const url = await getDownloadURL(storageRef);
 
-		await setDoc(firestoreRef, {
+		await setDoc(documentRef, {
 			title: title,
 			description: description,
 			date: Timestamp.fromDate(date),
