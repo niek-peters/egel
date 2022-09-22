@@ -39,9 +39,8 @@
 		</h1>
 		<p class="text-lg">
 			Heb je interesse in het helpen bij het opschrijven van belangrijke gebeurtenissen binnen Egel?
-			Stuur hier dan de informatie over de gebeurtenis en potentieel een afbeelding op naar de Egel
-			Historians! Alle inzendingen worden eerst gecontroleerd voordat ze toegevoegd worden aan de
-			tijdbalk.
+			Stuur hier dan de informatie over de gebeurtenis en potentieel een afbeelding op! Alle
+			inzendingen worden eerst gecontroleerd voordat ze toegevoegd worden aan de tijdbalk.
 			<br />
 			Voor vragen over de richtlijnen om te volgen bij je inzending, kun je terecht in de Discord server.
 		</p>
@@ -53,6 +52,8 @@
 				type="text"
 				name="title"
 				id="title"
+				minlength="3"
+				maxlength="50"
 				bind:value={title}
 				class="w-full rounded-lg border outline-none border-gray-300 p-2 mb-4 focus:border-purple-500 transition"
 			/>
@@ -69,6 +70,8 @@
 			<textarea
 				name="description"
 				id="description"
+				minlength="3"
+				maxlength="1023"
 				bind:value={description}
 				class="w-full  rounded-lg border outline-none border-gray-300 p-2 mb-4 focus:border-purple-500 transition"
 			/>
