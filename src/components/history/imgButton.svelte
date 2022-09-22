@@ -3,6 +3,8 @@
 	import Fa from 'svelte-fa';
 	import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+	import { setImg } from '../../stores/imgStore';
+
 	// @ts-ignore
 	import cropImage from '../../scripts/cropImage';
 
@@ -41,6 +43,9 @@
 				cropImage(ctx, img, 0, 0, canvas.width, canvas.height);
 
 				imgUrl = ctx.canvas.toDataURL('image/jpg');
+
+				// console.log(imgUrl);
+				setImg(imgUrl);
 			};
 		};
 	}

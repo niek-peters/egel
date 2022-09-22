@@ -5,8 +5,8 @@
 	import Line from '../../../components/general/line.svelte';
 	import TeamCard from '../../../components/general/teamCard.svelte';
 
-	import ImgButton from '../../../components/history/imgButton.svelte';
 	import Timeline from '../../../components/history/timeline.svelte';
+	import Contribute from '../../../components/history/contribute.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -38,54 +38,7 @@
 		<Line color="bg-gray-300" />
 		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
 
-		<div class="2xl:w-3/5 sm:w-4/5">
-			<article class="w-full mb-12">
-				<h1 class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3">
-					Bijdragen aan de tijdlijn
-				</h1>
-				<p class="text-lg">
-					Heb je interesse in het helpen bij het opschrijven van belangrijke gebeurtenissen binnen
-					Egel? Stuur hier dan de informatie over de gebeurtenis en potentieel een afbeelding op
-					naar de Egel Historians! Alle inzendingen worden eerst gecontroleerd voordat ze toegevoegd
-					worden aan de tijdbalk.
-					<br />
-					Voor vragen over de richtlijnen om te volgen bij je inzending, kun je terecht in de Discord
-					server.
-				</p>
-			</article>
-			<form class="flex justify-between">
-				<div class="w-1/3 mr-8">
-					<label for="title" class="block text-lg font-semibold mb-2">Titel</label>
-					<input
-						type="text"
-						name="title"
-						id="title"
-						class="w-full rounded-lg border outline-none border-gray-300 p-2 mb-4 focus:border-purple-500 transition"
-					/>
-					<label for="title" class="block text-lg font-semibold mb-2">Datum</label>
-					<input
-						type="date"
-						name="title"
-						id="title"
-						class="w-full rounded-lg border outline-none border-gray-300 p-2 mb-4 focus:border-purple-500 transition"
-					/>
-					<label for="description" class="block text-lg font-semibold mb-2">Beschrijving</label>
-					<textarea
-						name="description"
-						id="description"
-						class="w-full  rounded-lg border outline-none border-gray-300 p-2 mb-4 focus:border-purple-500 transition"
-					/>
-					<button
-						type="submit"
-						class="w-full rounded-lg border outline-none border-gray-300 p-2 mb-2 text-white bg-purple-400 hover:bg-purple-500 transition"
-					>
-						Verstuur
-					</button>
-				</div>
-
-				<ImgButton />
-			</form>
-		</div>
+		<Contribute />
 
 		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
 		<Line color="bg-gray-300" />
