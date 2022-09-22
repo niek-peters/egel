@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getStorage, ref, uploadString } from 'firebase/storage';
+	import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 	import { ulid } from 'ulid';
 	import { db } from '../../scripts/firebaseInit';
 	import { doc, setDoc, getFirestore, Timestamp } from 'firebase/firestore';
@@ -15,20 +15,25 @@
 		const storage = getStorage();
 		const storageRef = ref(storage, `history/${ulid()}`);
 
-		uploadString(storageRef, $imgStore, 'data_url').then(async (snapshot) => {
-			await setDoc(doc(getFirestore(), 'History', user.uid), {
-				title: title,
-				description: description,
-				date: Timestamp.fromDate(date),
-				img: snapshot.metadata.fullPath,
-			});
+		const firestore = getFirestore();
+		const firestoreRef = doc(firestore, 'History', ulid());
+
+		await uploadString(storageRef, $imgStore, 'data_url');
+
+		const url = await getDownloadURL(storageRef);
+
+		await setDoc(firestoreRef, {
+			title: title,
+			description: description,
+			date: Timestamp.fromDate(date),
+			img: url
 		});
 	}
 
 	let title: string = '';
 	let description: string = '';
 	let dateInput: HTMLInputElement;
-	let date: Date;
+	let date: Date = new Date();
 </script>
 
 <div class="2xl:w-3/5 sm:w-4/5">
