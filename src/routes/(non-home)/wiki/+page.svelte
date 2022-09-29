@@ -4,6 +4,8 @@
 
 	import Line from '../../../components/general/line.svelte';
 	import TeamCard from '../../../components/general/teamCard.svelte';
+
+	import TermsList from '../../../components/wiki/termsList.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -31,7 +33,14 @@
 	</div>
 	<div style="margin-bottom: 84vh;" />
 	<Line />
-
+	<TermsList />
+	<div class="flex flex-col items-center relative w-full my-12 bg-gray-200">
+		<Line color="bg-gray-300" />
+		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
+		b
+		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
+		<Line color="bg-gray-300" />
+	</div>
 	<TeamCard
 		title="Egel Historians"
 		title1="MeneerValk"
