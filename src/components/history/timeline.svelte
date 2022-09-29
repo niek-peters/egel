@@ -8,7 +8,6 @@
 	import type { Event } from '../../models/event';
 	import { formatDate } from '../../models/event';
 	import { Timestamp } from 'firebase/firestore';
-	import { now } from 'svelte/internal';
 
 	onMount(() => {
 		focusSlider();
@@ -20,8 +19,6 @@
 
 	let events: Event[] = [];
 
-	// Temporary events in memory
-	// TODO: Replace with Firestore database read
 	async function displayHistory() {
 		events = (await getHistory()) as Event[];
 	}

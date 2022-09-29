@@ -15,7 +15,7 @@
 		>
 		<a
 			class="mx-4 border-b border-transparent hover:text-gray-200 hover:border-gray-200 transition"
-			href="/online">Online</a
+			href="/wiki">Wiki</a
 		>
 	</nav>
 	<AuthButton />
