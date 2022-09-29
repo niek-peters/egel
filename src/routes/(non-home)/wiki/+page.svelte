@@ -6,6 +6,7 @@
 	import TeamCard from '../../../components/general/teamCard.svelte';
 
 	import TermsList from '../../../components/wiki/termsList.svelte';
+	import MembersList from '../../../components/wiki/membersList.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -37,7 +38,7 @@
 	<div class="flex flex-col items-center relative w-full my-12 bg-gray-200">
 		<Line color="bg-gray-300" />
 		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
-		b
+		<MembersList />
 		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
 		<Line color="bg-gray-300" />
 	</div>
