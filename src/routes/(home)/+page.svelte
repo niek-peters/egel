@@ -36,7 +36,7 @@
 				</a>
 				<a
 					class="flex justify-center items-center w-fit text-xl text-purple-600 hover:text-purple-800 transition py-1 px-4 m-2"
-					href="/"
+					href="/wiki"
 				>
 					<Fa class="mr-3" icon={faUser} /> Leden <Fa class="ml-3" icon={faChevronRight} />
 				</a>
@@ -107,14 +107,24 @@
 	<!-- Developer team card -->
 	<TeamCard
 		title="Egel Developers"
-		title1="MeneerValk"
-		title2="Milanutje"
-		title3="Motrix"
-		title4="Goeloes"
-		img1="/meneervalk.png"
-		img2="/milanutje.png"
-		img3="/motrix.png"
-		img4="/goeloes.png"
+		teamMembers={[
+			{
+				name: 'MeneerValk',
+				img: '/meneervalk.png'
+			},
+			{
+				name: 'Milanutje',
+				img: '/milanutje.png'
+			},
+			{
+				name: 'Motrix',
+				img: '/motrix.png'
+			},
+			{
+				name: 'Goeloes',
+				img: '/goeloes.png'
+			}
+		]}
 	>
 		<p>
 			Binnen de Egel Community hebben we ook ons eigen developer team! Makers van
@@ -134,14 +144,24 @@
 	<!-- Creators card -->
 	<TeamCard
 		title="Egel Creators"
-		title1="Wouter van der Ven"
-		title2="Milanutje"
-		title3="Motrix"
-		title4="Bogdan"
-		img1="/wouter.png"
-		img2="/milanutje.png"
-		img3="/motrix.png"
-		img4="/bogdan.jpg"
+		teamMembers={[
+			{
+				name: 'Wouter van der Ven',
+				img: '/wouter.png'
+			},
+			{
+				name: 'Milanutje',
+				img: '/milanutje.png'
+			},
+			{
+				name: 'Motrix',
+				img: '/motrix.png'
+			},
+			{
+				name: 'Bogdan',
+				img: '/bogdan.jpg'
+			}
+		]}
 	>
 		<p>
 			Naast developers hebben we ook creatief talent! Deze leden hebben stukken gecomponeerd en

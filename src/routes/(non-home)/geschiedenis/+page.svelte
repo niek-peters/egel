@@ -46,14 +46,24 @@
 
 	<TeamCard
 		title="Egel Historians"
-		title1="MeneerValk"
-		title2="Bogdan"
-		title3="Motrix"
-		title4="Goeloes"
-		img1="/meneervalk.png"
-		img2="/bogdan.jpg"
-		img3="/motrix.png"
-		img4="/goeloes.png"
+		teamMembers={[
+			{
+				name: 'MeneerValk',
+				img: '/meneervalk.png'
+			},
+			{
+				name: 'Bogdan',
+				img: '/bogdan.jpg'
+			},
+			{
+				name: 'Motrix',
+				img: '/motrix.png'
+			},
+			{
+				name: 'Goeloes',
+				img: '/goeloes.png'
+			}
+		]}
 	>
 		<p>
 			De geschiedenis schrijft zichzelf niet! Dankzij deze leden is de geschiedenis van Egel

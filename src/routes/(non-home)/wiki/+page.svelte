@@ -43,20 +43,74 @@
 		<Line color="bg-gray-300" />
 	</div>
 	<TeamCard
-		title="Egel Historians"
-		title1="MeneerValk"
-		title2="Bogdan"
-		title3="Motrix"
-		title4="Goeloes"
-		img1="/meneervalk.png"
-		img2="/bogdan.jpg"
-		img3="/motrix.png"
-		img4="/goeloes.png"
+		title="Egel Gamers"
+		teamMembers={[
+			{
+				name: 'MeneerValk',
+				img: '/meneervalk.png'
+			},
+			{
+				name: 'Bogdan',
+				img: '/bogdan.jpg'
+			},
+			{
+				name: 'Motrix',
+				img: '/motrix.png'
+			},
+			{
+				name: 'Goeloes',
+				img: '/goeloes.png'
+			},
+			{
+				name: 'Goeloes',
+				img: '/goeloes.png'
+			},
+			{
+				name: 'Goeloes',
+				img: '/goeloes.png'
+			},
+			{
+				name: 'Goeloes',
+				img: '/goeloes.png'
+			},
+			{
+				name: 'Goeloes',
+				img: '/goeloes.png'
+			}
+		]}
 	>
 		<p>
-			De geschiedenis schrijft zichzelf niet! Dankzij deze leden is de geschiedenis van Egel
-			bijgehouden en opgeschreven. Als je vragen hebt over de geschiedenis van Egel, weet je bij wie
-			je moet zijn.
+			Een groot deel van de Egel Community bestaat uit gamers. De meeste hiervan komen uit de groep
+			originele Egelaars uit de 1e klas. Samen spelen we games als CS:GO, Minecraft, Hearts of Iron
+			4 en SCP Secret Laboratory. We houden vaak vriendelijke toernooien of spelen 's avonds
+			gezellig samen.
+		</p>
+	</TeamCard>
+	<Line />
+	<TeamCard
+		title="The Noob Group (aka The Next Generation)"
+		teamMembers={[
+			{
+				name: 'Keindert',
+				img: '/goeloes.png'
+			},
+			{
+				name: 'Wouter van der Ven',
+				img: '/wouter.png'
+			},
+			{
+				name: 'Jarvis',
+				img: '/goeloes.png'
+			},
+			{
+				name: 'Joep',
+				img: '/goeloes.png'
+			}
+		]}
+	>
+		<p>
+			Een groep vrienden waarvan de meesten bij elkaar in een 3 VWO klas zaten, die grotendeels
+			tijdens de 4e klas bij de Egel Community zijn gegaan.
 		</p>
 	</TeamCard>
 </main>
