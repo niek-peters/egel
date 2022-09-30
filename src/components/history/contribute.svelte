@@ -6,7 +6,7 @@
 
 	async function submitHistory() {
 		// If we are missing data, don't submit it
-		if (!title || !description || !date || !$imgStore) {
+		if (!title || !description || !date) {
 			success = '';
 			error = 'Vul alle velden in!';
 			setTimeout(() => (error = ''), 2000);

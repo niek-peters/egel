@@ -32,11 +32,7 @@
 	<div class="w-full my-4">
 		<ul class="flex justify-between my-2 text-lg font-semibold">
 			<TimeLabel time="2017" />
-			<TimeLabel time="2018" />
-			<TimeLabel time="2019" />
-			<TimeLabel time="2020" />
-			<TimeLabel time="2021" />
-			<TimeLabel time="2022" />
+			<TimeLabel time="Heden" />
 		</ul>
 		<input
 			type="range"

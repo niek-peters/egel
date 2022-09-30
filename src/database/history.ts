@@ -13,11 +13,15 @@ export async function getHistory() {
 }
 
 export async function addHistory(title: string, description: string, date: Date, img: string) {
-	const storageRef = ref(storage, `history/${ulid()}`);
+	let url = '';
 
-	await uploadString(storageRef, img, 'data_url');
+	if (img) {
+		const storageRef = ref(storage, `history/${ulid()}`);
 
-	const url = await getDownloadURL(storageRef);
+		await uploadString(storageRef, img, 'data_url');
+
+		url = await getDownloadURL(storageRef);
+	}
 
 	await addDoc(collection(db, 'History'), {
 		title: title,

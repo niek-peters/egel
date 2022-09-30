@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let date: string = '13 September 2022';
-	export let title: string = 'Bogdan wordt eindelijk 10';
-	export let description: string = 'BLYATTTTTTTTTTTTTTTTTTT';
+	export let date: string;
+	export let title: string;
+	export let description: string;
 	export let img: string | undefined;
 </script>
 

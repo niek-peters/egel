@@ -2,7 +2,7 @@
 	export let time: string = '2017';
 </script>
 
-<li class="relative flex justify-center">{time}</li>
+<li class="relative flex justify-center w-14">{time}</li>
 
 <style lang="scss">
 	li {
