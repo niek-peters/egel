@@ -38,7 +38,7 @@
 			const auth = getAuth();
 			await signOut(auth);
 
-			authStore.set({ isLoggedIn: false, user: null });
+			authStore.set({ user: null });
 		} catch (e) {
 			console.log(e);
 		} finally {
@@ -66,7 +66,7 @@
 </script>
 
 <div class="text-lg">
-	{#if $authStore.isLoggedIn && $authStore.user}
+	{#if $authStore.user}
 		<div class="relative flex justify-end w-48">
 			<button
 				class="flex justify-between items-center font-semibold"
