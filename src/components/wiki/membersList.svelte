@@ -11,7 +11,7 @@
 	awaitMembers();
 </script>
 
-<div class="2xl:w-3/5 sm:w-4/5">
+<div class="2xl:w-3/5 sm:w-4/5" id="leden">
 	<article class="w-full mb-12">
 		<h1 class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3">
 			Leden van de Egel Community

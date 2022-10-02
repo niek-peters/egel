@@ -31,7 +31,7 @@
 	}
 </script>
 
-<FullCard title="Termen en definities">
+<FullCard title="Termen en definities" id="termen">
 	{#if terms.length}
 		<ul class="w-full -mb-4">
 			{#each terms as word}

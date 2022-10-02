@@ -28,7 +28,7 @@
 	let slider: HTMLInputElement;
 </script>
 
-<div class="2xl:w-3/5 sm:w-4/5 my-12" on:click={focusSlider}>
+<div class="2xl:w-3/5 sm:w-4/5 my-12" on:click={focusSlider} id="tijdlijn">
 	<div class="w-full my-4">
 		<ul class="flex justify-between my-2 text-lg font-semibold">
 			<TimeLabel time="2017" />

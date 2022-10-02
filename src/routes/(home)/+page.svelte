@@ -30,13 +30,13 @@
 				</a>
 				<a
 					class="flex justify-center items-center w-fit text-xl text-purple-600 hover:text-purple-800 transition py-1 px-4 m-2"
-					href="/geschiedenis"
+					href="/geschiedenis#tijdlijn"
 				>
-					<Fa class="mr-3" icon={faHourglass} /> Tijdbalk <Fa class="ml-3" icon={faChevronRight} />
+					<Fa class="mr-3" icon={faHourglass} /> Tijdlijn <Fa class="ml-3" icon={faChevronRight} />
 				</a>
 				<a
 					class="flex justify-center items-center w-fit text-xl text-purple-600 hover:text-purple-800 transition py-1 px-4 m-2"
-					href="/wiki"
+					href="/wiki#leden"
 				>
 					<Fa class="mr-3" icon={faUser} /> Leden <Fa class="ml-3" icon={faChevronRight} />
 				</a>
