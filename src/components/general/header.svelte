@@ -3,8 +3,6 @@
 
 	import AuthButton from './authButton.svelte';
 
-	$: $page, console.log($page.routeId);
-
 	export let small = false;
 </script>
 

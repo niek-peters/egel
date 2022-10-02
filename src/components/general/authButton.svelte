@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
-	import { faUser, faAddressCard } from '@fortawesome/free-regular-svg-icons';
-	import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+	import { faUser } from '@fortawesome/free-regular-svg-icons';
+	import { faArrowRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons';
 	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 	import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
@@ -9,6 +9,9 @@
 
 	import { authStore } from '../../stores/auth';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+
+	import { page } from '$app/stores';
 
 	let menuEl: HTMLUListElement;
 
@@ -38,6 +41,8 @@
 			authStore.set({ isLoggedIn: false, user: null });
 		} catch (e) {
 			console.log(e);
+		} finally {
+			if ($page.routeId == '(non-home)/mijn-account') goto('/');
 		}
 	}
 
@@ -72,16 +77,21 @@
 				</div>
 			</button>
 			<ul
-				class="absolute flex flex-col items-start w-48 top-14 right-0 bg-gray-200 text-black text-lg p-4 rounded-lg opacity-0 transition"
+				class="absolute flex flex-col items-start w-48 top-14 right-0 bg-gray-200 shadow-md text-black text-lg p-4 rounded-lg opacity-0 transition"
 				bind:this={menuEl}
 				on:click|stopPropagation
 			>
-				<li class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition">
-					<Fa icon={faAddressCard} class="mr-3" />Mijn account
+				<li
+					class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition"
+					on:click={() => goto('/mijn-account')}
+					on:click={closeMenu}
+				>
+					<Fa icon={faGear} class="mr-3" />Instellingen
 				</li>
 				<li
 					class="flex items-center cursor-pointer hover:text-gray-600 transition"
 					on:click|preventDefault={logout}
+					on:click={closeMenu}
 				>
 					<Fa icon={faArrowRightFromBracket} class="mr-3" />Uitloggen
 				</li>
