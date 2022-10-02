@@ -1,20 +1,14 @@
 import { writable } from 'svelte/store';
 
 import type { User } from 'firebase/auth';
+import type { UserType } from '../models/user';
 
-type AuthType = {
-	isLoggedIn: boolean;
-	user: User | null;
-};
-
-export const authStore = writable<AuthType>({
-	isLoggedIn: false,
+export const authStore = writable<UserType>({
 	user: null
 });
 
 export function setAuth(user: User | null) {
 	authStore.set({
-		isLoggedIn: !!user,
 		user
 	});
 }

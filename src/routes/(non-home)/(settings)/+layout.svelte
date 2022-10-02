@@ -10,7 +10,7 @@
 
 <FullCard title="Instellingen">
 	<div class="wrapper flex">
-		<nav class="flex flex-col pr-8 mr-4 w-fit border-r border-gray-200">
+		<nav class="flex flex-col pr-4 mr-4 w-80 border-r border-gray-200">
 			<a
 				href="/mijn-account"
 				class="flex items-center bg-gray-200 hover:bg-gray-300 mb-2 rounded-lg h-12 pl-4 transition overflow-hidden"
@@ -33,10 +33,12 @@
 			>
 			<button
 				class="flex items-center mb-2 mt-auto bg-red-300 hover:bg-red-400 rounded-lg h-12 px-4 transition"
-				><Fa icon={faTrashCan} class="mr-3 text-xl" />Account verwijderen</button
+				><Fa icon={faTrashCan} class="mr-3 text-xl" />Gevarenzone</button
 			>
 		</nav>
-		<slot />
+		<div class="w-full">
+			<slot />
+		</div>
 	</div>
 </FullCard>
 
