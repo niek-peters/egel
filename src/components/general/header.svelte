@@ -1,5 +1,7 @@
 <script>
 	import AuthButton from './authButton.svelte';
+
+	export let small = false;
 </script>
 
 <header class="flex sm:w-3/5 2xl:w-2/5 items-center justify-between my-4 z-10 text-white">
@@ -20,16 +22,18 @@
 	</nav>
 	<AuthButton />
 </header>
-<div class="background absolute w-full" />
+<div class={`background absolute w-full ${small ? 'short' : 'tall'}`} />
 
 <style lang="scss">
-	/* div {
-		height: 48rem;
-		background-image: -webkit-linear-gradient(95deg, white 50%, rgb(168 85 247) 50.3%);
-	} */
+	.tall {
+		height: 64vh;
+	}
+
+	.short {
+		height: 36vh;
+	}
 
 	.background {
-		height: 64vh;
 		background-image: url('/bg-1.svg');
 		background-size: cover;
 		background-position: center;
