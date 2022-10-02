@@ -44,6 +44,7 @@
 		if (!menuEl) return;
 
 		menuEl.classList.toggle('opacity-100');
+		menuEl.classList.toggle('opacity-0');
 	}
 </script>
 
