@@ -8,6 +8,7 @@
 	import { doc, setDoc, getFirestore } from 'firebase/firestore';
 
 	import { authStore } from '../../stores/auth';
+	import { onMount } from 'svelte';
 
 	let menuEl: HTMLUListElement;
 
@@ -40,7 +41,9 @@
 		}
 	}
 
-	window.onclick = closeMenu;
+	onMount(() => {
+		window.onclick = closeMenu;
+	});
 
 	function closeMenu() {
 		if (!menuEl) return;
