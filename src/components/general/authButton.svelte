@@ -74,9 +74,17 @@
 				class="flex justify-between items-center font-semibold"
 				on:click|stopPropagation={toggleMenu}
 				>{$authStore.displayName || $authStore.user.displayName}
-				<div class="flex justify-center items-center bg-white/10 w-10 h-10 rounded-full ml-4">
-					<Fa icon={faUser} />
-				</div>
+				{#if $authStore.pfPic || $authStore.user.photoURL}
+					<img
+						class="w-10 h-10 rounded-full ml-4"
+						src={$authStore.pfPic || $authStore.user.photoURL}
+						alt="Profielfoto"
+					/>
+				{:else}
+					<div class="flex justify-center items-center bg-white/10 w-10 h-10 rounded-full ml-4">
+						<Fa icon={faUser} />
+					</div>
+				{/if}
 			</button>
 			<ul
 				class="absolute flex flex-col items-start w-48 top-14 right-0 bg-gray-200 shadow-md text-black text-lg p-4 rounded-lg opacity-0 transition"

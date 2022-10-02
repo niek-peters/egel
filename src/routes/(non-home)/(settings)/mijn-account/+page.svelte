@@ -6,18 +6,16 @@
 
 	import { db } from '../../../../scripts/firebaseInit';
 	import { doc, updateDoc } from 'firebase/firestore';
+	import cropImage from '../../../../scripts/cropImage';
+	import { addPfPic } from '../../../../database/pfPic';
 
 	let usernameErr: string;
-	let passwordErr: string;
 	let pfPicErr: string;
 
 	let newUsername: string;
-	let password: string;
-	let newPassword: string;
 	let pfPicUrl: string;
 
 	let usernameChanged: boolean = false;
-	let passwordChanged: boolean = false;
 
 	async function changeUsername() {
 		if (!browser) return;
@@ -51,98 +49,37 @@
 		}
 	}
 
-	async function changePassword() {
-		if (!browser) return;
-		// try {
-		// 	if (!(password && newPassword)) throw new Error('Please fill in all fields');
-
-		// 	let token = localStorage.getItem('auth-token');
-		// 	if (!token || token === 'undefined')
-		// 		throw new Error('Could not authenticate you, maybe try logging out and logging back in?');
-
-		// 	const response = await fetch('http://127.0.0.1:3000/api/users', {
-		// 		method: 'PUT',
-		// 		headers: {
-		// 			'Content-type': 'application/json',
-		// 			Authorization: token as string
-		// 		},
-		// 		body: JSON.stringify({
-		// 			uuid: user.uuid,
-		// 			password: password,
-		// 			new_password: newPassword
-		// 		})
-		// 	});
-
-		// 	if (response.status !== 200) throw new Error(await response.text());
-
-		// 	// Reset all inputs and errors
-		// 	password = newPassword = passwordErr = '';
-
-		// 	// Login
-		// 	login(response.headers.get('Authorization'));
-
-		// 	passwordChanged = true;
-
-		// 	setTimeout(() => {
-		// 		passwordChanged = false;
-		// 	}, 2000);
-		// } catch (er) {
-		// 	if (er instanceof Error) {
-		// 		passwordChanged = false;
-		// 		passwordErr = er.message;
-
-		// 		setTimeout(() => {
-		// 			passwordErr = '';
-		// 		}, 2000);
-		// 	}
-		// }
-	}
-
 	async function changePfPic() {
 		if (!browser) return;
-		// try {
-		// 	if (!pfPicInput.files) throw new Error('Please choose a new profile picture');
+		try {
+			if (!$authStore.user) throw new Error('Je bent niet ingelogd');
+			if (!imgUrl) throw new Error('Kies een nieuwe profielfoto');
 
-		// 	let token = localStorage.getItem('auth-token');
-		// 	if (!token || token === 'undefined')
-		// 		throw new Error('Could not authenticate you, maybe try logging out and logging back in?');
+			const url = await addPfPic($authStore.user.uid, imgUrl);
 
-		// 	const formData = new FormData();
-		// 	formData.append('pf_pic', pfPicInput.files[0]);
+			await updateDoc(doc(db, 'Users', $authStore.user.uid), {
+				pfPic: url
+			});
 
-		// 	const response = await fetch('http://127.0.0.1:3000/api/images', {
-		// 		method: 'PUT',
-		// 		headers: {
-		// 			Authorization: token as string
-		// 		},
-		// 		body: formData
-		// 	});
+			setAuth({
+				user: $authStore.user,
+				displayName: $authStore.displayName,
+				pfPic: url
+			});
 
-		// 	if (response.status !== 200) throw new Error(await response.text());
+			// Reset all inputs and errors
+			pfPicUrl = pfPicErr = '';
+		} catch (er) {
+			if (er instanceof Error) {
+				if (er instanceof Error) {
+					pfPicErr = er.message;
 
-		// 	// Reset all inputs and errors
-		// 	pfPicUrl = pfPicErr = '';
-
-		// 	// Login
-		// 	login(response.headers.get('Authorization'));
-		// } catch (er) {
-		// 	if (er instanceof Error) {
-		// 		// Find the message in the html (I know it's stupid)
-		// 		if (er.message.includes('<')) pfPicErr = betweenMarkers(er.message, '<pre>Error: ', '<br>');
-		// 		else pfPicErr = er.message;
-
-		// 		setTimeout(() => {
-		// 			pfPicErr = '';
-		// 		}, 2000);
-		// 	}
-		// }
-	}
-
-	function betweenMarkers(text: string, begin: string, end: string): string {
-		var firstChar = text.indexOf(begin) + begin.length;
-		var lastChar = text.indexOf(end);
-		var newText = text.substring(firstChar, lastChar);
-		return newText;
+					setTimeout(() => {
+						pfPicErr = '';
+					}, 2000);
+				}
+			}
+		}
 	}
 
 	function updateImgPreview() {
@@ -154,10 +91,46 @@
 			return;
 		}
 
+		const reader = new FileReader();
+
+		reader.readAsDataURL(pfPicInput.files[0]);
+
+		reader.onload = function (event) {
+			const imgElement = document.createElement('img');
+			if (!imgElement || !event.target || !event.target.result) return;
+
+			imgElement.src = event.target.result as string;
+
+			imgElement.onload = function (e) {
+				const img = e.target as CanvasImageSource;
+				if (
+					!e.target ||
+					!img.width ||
+					!img.height ||
+					typeof img.width !== 'number' ||
+					typeof img.height !== 'number'
+				)
+					return;
+
+				const canvas = document.createElement('canvas');
+				canvas.width = 64;
+				canvas.height = 64;
+
+				const ctx = canvas.getContext('2d');
+				if (!ctx) return;
+
+				cropImage(ctx, img, 0, 0, canvas.width, canvas.height);
+
+				// console.log(imgUrl);
+				imgUrl = ctx.canvas.toDataURL('image/jpg');
+			};
+		};
+
 		pfPicUrl = URL.createObjectURL(pfPicInput.files[0]);
 	}
 
 	let pfPicInput: HTMLInputElement;
+	let imgUrl: string;
 </script>
 
 {#if $authStore.user}
@@ -198,9 +171,9 @@
 					alt="pf pic"
 					class="rounded-full overflow-hidden w-36 h-36 object-cover"
 				/>
-			{:else if $authStore.pfPic}
+			{:else if $authStore.pfPic || $authStore.user.photoURL}
 				<img
-					src={$authStore.pfPic}
+					src={$authStore.pfPic || $authStore.user.photoURL}
 					alt="pf pic"
 					class="rounded-full overflow-hidden w-36 h-36 object-cover"
 				/>
