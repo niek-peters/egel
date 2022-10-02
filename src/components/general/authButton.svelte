@@ -40,6 +40,15 @@
 		}
 	}
 
+	window.onclick = closeMenu;
+
+	function closeMenu() {
+		if (!menuEl) return;
+
+		menuEl.classList.remove('opacity-100');
+		menuEl.classList.add('opacity-0');
+	}
+
 	function toggleMenu() {
 		if (!menuEl) return;
 
@@ -50,8 +59,10 @@
 
 <div class="text-lg">
 	{#if $authStore.isLoggedIn && $authStore.user}
-		<div class="relative">
-			<button class="flex justify-between items-center font-semibold" on:click={toggleMenu}
+		<div class="relative flex justify-end w-48">
+			<button
+				class="flex justify-between items-center font-semibold"
+				on:click|stopPropagation={toggleMenu}
 				>{$authStore.user.displayName}
 				<div class="flex justify-center items-center bg-white/10 w-10 h-10 rounded-full ml-4">
 					<Fa icon={faUser} />
@@ -60,6 +71,7 @@
 			<ul
 				class="absolute flex flex-col items-start w-48 top-14 right-0 bg-gray-200 text-black text-lg p-4 rounded-lg opacity-0 transition"
 				bind:this={menuEl}
+				on:click|stopPropagation
 			>
 				<li class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition">
 					<Fa icon={faAddressCard} class="mr-3" />Mijn account
@@ -74,7 +86,7 @@
 		</div>
 	{:else}
 		<button
-			class="flex justify-center items-center font-semibold"
+			class="flex items-center font-semibold justify-end w-48"
 			on:click|preventDefault={loginWithGoogle}
 		>
 			<Fa class="mr-2" icon={faGoogle} /> Login
