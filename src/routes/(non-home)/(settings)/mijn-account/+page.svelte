@@ -2,7 +2,10 @@
 	import Fa from 'svelte-fa';
 	import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 	import { browser } from '$app/environment';
-	import { authStore } from '../../../../stores/auth';
+	import { authStore, setAuth } from '../../../../stores/auth';
+
+	import { db } from '../../../../scripts/firebaseInit';
+	import { doc, updateDoc } from 'firebase/firestore';
 
 	let usernameErr: string;
 	let passwordErr: string;
@@ -18,48 +21,34 @@
 
 	async function changeUsername() {
 		if (!browser) return;
-		// try {
-		// 	if (!newUsername) throw new Error('Please enter a new username');
+		try {
+			if (!$authStore.user) throw new Error('Je bent niet ingelogd');
+			if (!newUsername) throw new Error('Vul een nieuwe gebruikersnaam in');
 
-		// 	let token = localStorage.getItem('auth-token');
-		// 	if (!token || token === 'undefined')
-		// 		throw new Error('Could not authenticate you, maybe try logging out and logging back in?');
+			await updateDoc(doc(db, 'Users', $authStore.user.uid), {
+				username: newUsername
+			});
 
-		// 	const response = await fetch('http://127.0.0.1:3000/api/users', {
-		// 		method: 'PUT',
-		// 		headers: {
-		// 			'Content-type': 'application/json',
-		// 			Authorization: token as string
-		// 		},
-		// 		body: JSON.stringify({
-		// 			uuid: user.uuid,
-		// 			name: newUsername
-		// 		})
-		// 	});
+			setAuth({ user: $authStore.user, displayName: newUsername, pfPic: $authStore.pfPic });
 
-		// 	if (response.status !== 200) throw new Error(await response.text());
+			// Reset all inputs and errors
+			newUsername = usernameErr = '';
 
-		// 	// Reset all inputs and errors
-		// 	newUsername = usernameErr = '';
+			usernameChanged = true;
 
-		// 	// Login
-		// 	login(response.headers.get('Authorization'));
+			setTimeout(() => {
+				usernameChanged = false;
+			}, 2000);
+		} catch (er) {
+			if (er instanceof Error) {
+				usernameChanged = false;
+				usernameErr = er.message;
 
-		// 	usernameChanged = true;
-
-		// 	setTimeout(() => {
-		// 		usernameChanged = false;
-		// 	}, 2000);
-		// } catch (er) {
-		// 	if (er instanceof Error) {
-		// 		usernameChanged = false;
-		// 		usernameErr = er.message;
-
-		// 		setTimeout(() => {
-		// 			usernameErr = '';
-		// 		}, 2000);
-		// 	}
-		// }
+				setTimeout(() => {
+					usernameErr = '';
+				}, 2000);
+			}
+		}
 	}
 
 	async function changePassword() {
@@ -227,72 +216,35 @@
 			>
 		</button>
 	</form>
-	<div class="flex flex-col items-center mt-6">
-		<div class="flex justify-between w-4/5 mt-4">
-			<form class="flex flex-col items-center" on:submit|preventDefault={changeUsername}>
-				<h4 class="text-lg mb-4 font-semibold">Change username:</h4>
-				<input
-					class="p-2 text-lg rounded-md m-2 outline-none border-transparent focus:border-gray-400 border-2 transition w-72"
-					type="text"
-					placeholder="New username"
-					required
-					bind:value={newUsername}
-					minlength="3"
-					maxlength="24"
-				/>
-				<button
-					class="p-2 text-lg rounded-md m-2 text-white bg-purple-400 hover:bg-purple-500 transition w-72"
-					>Submit</button
+	<div class="mt-6">
+		<form class="flex flex-col items-center" on:submit|preventDefault={changeUsername}>
+			<h4 class="text-lg mb-4 font-semibold">Gebruikersnaam veranderen:</h4>
+			<input
+				class="p-2 text-lg rounded-md m-2 outline-none border-transparent focus:border-gray-400 border-2 transition w-72"
+				type="text"
+				placeholder="Nieuwe gebruikersnaam"
+				required
+				bind:value={newUsername}
+				minlength="3"
+				maxlength="24"
+			/>
+			<button
+				class="p-2 text-lg rounded-md m-2 text-white bg-purple-400 hover:bg-purple-500 transition w-72"
+				>Bevestigen</button
+			>
+			{#if usernameErr}
+				<p
+					class="flex justify-center p-2 text-lg rounded-md m-2 bg-red-400 border-red-500 border-2 w-72"
 				>
-				{#if usernameErr}
-					<p
-						class="flex justify-center p-2 text-lg rounded-md m-2 bg-red-400 border-red-500 border-2 w-72"
-					>
-						{usernameErr}
-					</p>
-				{:else if usernameChanged}
-					<p
-						class="flex justify-center p-2 text-lg rounded-md m-2 bg-green-400 border-green-500 border-2 w-72"
-					>
-						Username changed!
-					</p>
-				{/if}
-			</form>
-			<form class="flex flex-col items-center" on:submit|preventDefault={changePassword}>
-				<h4 class="text-lg mb-4 font-semibold">Change password:</h4>
-				<input
-					class="p-2 text-lg rounded-md m-2 outline-none border-transparent focus:border-gray-400 border-2 transition w-72"
-					type="password"
-					placeholder="Password"
-					required
-					bind:value={password}
-					minlength="3"
-					maxlength="255"
-				/><input
-					class="p-2 text-lg rounded-md m-2 outline-none border-transparent focus:border-gray-400 border-2 transition w-72"
-					type="password"
-					placeholder="New password"
-					required
-					bind:value={newPassword}
-					minlength="3"
-					maxlength="255"
-				/>
-				<button
-					class="flex justify-center p-2 text-lg rounded-md m-2 text-white bg-purple-400 hover:bg-purple-500 transition w-72"
-					>Submit</button
+					{usernameErr}
+				</p>
+			{:else if usernameChanged}
+				<p
+					class="flex justify-center p-2 text-lg rounded-md m-2 bg-green-400 border-green-500 border-2 w-72"
 				>
-				{#if passwordErr}
-					<p class="p-2 text-lg rounded-md m-2 bg-red-400 border-red-500 border-2 w-72">
-						{passwordErr}
-					</p>
-				{:else if passwordChanged}
-					<p
-						class="flex justify-center p-2 text-lg rounded-md m-2 bg-green-400 border-green-500 border-2 w-72"
-					>
-						Password changed!
-					</p>
-				{/if}
-			</form>
-		</div>
+					Gebruikersnaam veranderd!
+				</p>
+			{/if}
+		</form>
 	</div>
 {/if}

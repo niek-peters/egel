@@ -4,8 +4,9 @@
 	import { faArrowRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons';
 	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
+	import { db } from '../../scripts/firebaseInit';
 	import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
-	import { doc, setDoc, getFirestore } from 'firebase/firestore';
+	import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 	import { authStore } from '../../stores/auth';
 	import { onMount } from 'svelte';
@@ -22,12 +23,13 @@
 			const auth = getAuth();
 			const { user } = await signInWithPopup(auth, provider);
 
-			console.log(user);
+			const snapshot = await getDoc(doc(db, 'Users', user.uid));
 
-			await setDoc(doc(getFirestore(), 'Users', user.uid), {
-				email: user.email,
-				username: user.displayName
-			});
+			if (!snapshot.exists())
+				await setDoc(doc(db, 'Users', user.uid), {
+					email: user.email,
+					username: user.displayName
+				});
 		} catch (e) {
 			console.log(e);
 		}
@@ -42,7 +44,7 @@
 		} catch (e) {
 			console.log(e);
 		} finally {
-			if ($page.routeId == '(non-home)/mijn-account') goto('/');
+			if ($page.routeId?.includes('(non-home)/(settings)')) goto('/');
 		}
 	}
 
@@ -71,7 +73,7 @@
 			<button
 				class="flex justify-between items-center font-semibold"
 				on:click|stopPropagation={toggleMenu}
-				>{$authStore.user.displayName}
+				>{$authStore.displayName || $authStore.user.displayName}
 				<div class="flex justify-center items-center bg-white/10 w-10 h-10 rounded-full ml-4">
 					<Fa icon={faUser} />
 				</div>

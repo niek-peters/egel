@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 // import { getAnalytics } from 'firebase/analytics';
@@ -22,6 +22,13 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 // const analytics = getAnalytics(app);
 
-onAuthStateChanged(getAuth(), (user) => {
-	setAuth(user);
+onAuthStateChanged(getAuth(), async (user) => {
+	if (user) {
+		const snapshot = await getDoc(doc(db, 'Users', user.uid));
+		const data = snapshot.data();
+
+		if (data) {
+			setAuth({ user, displayName: data.username, pfPic: data.pfPic });
+		}
+	} else setAuth({ user });
 });
