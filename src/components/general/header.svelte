@@ -1,5 +1,9 @@
 <script>
+	import { page } from '$app/stores';
+
 	import AuthButton from './authButton.svelte';
+
+	$: $page, console.log($page.routeId);
 
 	export let small = false;
 </script>
@@ -8,15 +12,21 @@
 	<h1 class="w-36 text-3xl font-bold"><a href="/">Egel</a></h1>
 	<nav class="font-semibold text-lg">
 		<a
-			class="mx-4 border-b border-transparent hover:text-gray-200 hover:border-gray-200 transition"
+			class={`${
+				$page.routeId == '(home)' ? 'border-gray-200' : 'border-transparent'
+			} mx-4 border-b hover:text-gray-200 hover:border-gray-200 transition`}
 			href="/">Over ons</a
 		>
 		<a
-			class="mx-4 border-b border-transparent hover:text-gray-200 hover:border-gray-200 transition"
+			class={`${
+				$page.routeId == '(non-home)/geschiedenis' ? 'border-gray-200' : 'border-transparent'
+			} mx-4 border-b hover:text-gray-200 hover:border-gray-200 transition`}
 			href="/geschiedenis">Geschiedenis</a
 		>
 		<a
-			class="mx-4 border-b border-transparent hover:text-gray-200 hover:border-gray-200 transition"
+			class={`${
+				$page.routeId == '(non-home)/wiki' ? 'border-gray-200' : 'border-transparent'
+			} mx-4 border-b hover:text-gray-200 hover:border-gray-200 transition`}
 			href="/wiki">Wiki</a
 		>
 	</nav>
