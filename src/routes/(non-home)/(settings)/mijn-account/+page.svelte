@@ -113,8 +113,8 @@
 					return;
 
 				const canvas = document.createElement('canvas');
-				canvas.width = 64;
-				canvas.height = 64;
+				canvas.width = 128;
+				canvas.height = 128;
 
 				const ctx = canvas.getContext('2d');
 				if (!ctx) return;
@@ -143,7 +143,7 @@
 			<h2 class="text-4xl mr-8 mb-2">
 				<b>{$authStore.displayName || $authStore.user.displayName}</b>
 			</h2>
-			<h4 class="text-lg mr-8">{$authStore.user.uid}</h4>
+			<h4 class="text-lg mr-8">Google username: {$authStore.user.displayName}</h4>
 		</div>
 		<button
 			type="button"
