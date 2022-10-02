@@ -1,11 +1,15 @@
 <script lang="ts">
+	import Fa from 'svelte-fa';
+	import { faUser, faAddressCard } from '@fortawesome/free-regular-svg-icons';
+	import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+
 	import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
 	import { doc, setDoc, getFirestore } from 'firebase/firestore';
 
-	import Fa from 'svelte-fa';
-	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-
 	import { authStore } from '../../stores/auth';
+
+	let menuEl: HTMLUListElement;
 
 	async function loginWithGoogle() {
 		try {
@@ -35,13 +39,38 @@
 			console.log(e);
 		}
 	}
+
+	function toggleMenu() {
+		if (!menuEl) return;
+
+		menuEl.classList.toggle('opacity-100');
+	}
 </script>
 
-<div class="w-36 text-lg">
+<div class="text-lg">
 	{#if $authStore.isLoggedIn && $authStore.user}
-		<button class="font-semibold" on:click|preventDefault={logout}
-			>{$authStore.user.displayName}</button
-		>
+		<div class="relative">
+			<button class="flex justify-between items-center font-semibold" on:click={toggleMenu}
+				>{$authStore.user.displayName}
+				<div class="flex justify-center items-center bg-white/10 w-10 h-10 rounded-full ml-4">
+					<Fa icon={faUser} />
+				</div>
+			</button>
+			<ul
+				class="absolute flex flex-col items-start w-48 top-14 right-0 bg-gray-200 text-black text-lg p-4 rounded-lg opacity-0 transition"
+				bind:this={menuEl}
+			>
+				<li class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition">
+					<Fa icon={faAddressCard} class="mr-3" />Mijn account
+				</li>
+				<li
+					class="flex items-center cursor-pointer hover:text-gray-600 transition"
+					on:click|preventDefault={logout}
+				>
+					<Fa icon={faArrowRightFromBracket} class="mr-3" />Uitloggen
+				</li>
+			</ul>
+		</div>
 	{:else}
 		<button
 			class="flex justify-center items-center font-semibold"

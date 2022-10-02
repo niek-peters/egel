@@ -8,7 +8,7 @@
 	export let small = false;
 </script>
 
-<header class="flex sm:w-3/5 2xl:w-2/5 items-center justify-between my-4 z-10 text-white">
+<header class="flex sm:w-3/5 2xl:w-2/5 h-10 items-center justify-between my-4 z-10 text-white">
 	<h1 class="w-36 text-3xl font-bold"><a href="/">Egel</a></h1>
 	<nav class="font-semibold text-lg">
 		<a
