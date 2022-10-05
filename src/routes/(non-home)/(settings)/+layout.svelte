@@ -36,14 +36,38 @@
 				><Fa icon={faTrashCan} class="mr-3 text-xl" />Gevarenzone</button
 			>
 		</nav>
-		<div class="w-full h-full overflow-y-auto">
+		<div class="slot w-full h-full overflow-y-auto pr-4">
 			<slot />
 		</div>
 	</div>
 </FullCard>
 
-<style>
+<style lang="scss">
 	.wrapper {
 		height: 31rem;
+	}
+
+	.slot {
+		/* width */
+		&::-webkit-scrollbar {
+			width: 0.4rem;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: #e0e0e0;
+			border-radius: 0.5rem;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: #999;
+			border-radius: 0.5rem;
+		}
+
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background: #888;
+		}
 	}
 </style>
