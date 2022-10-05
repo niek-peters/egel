@@ -11,9 +11,7 @@ export async function getTerms() {
 
 	const docs = snapshot.docs.map((doc) => doc.data());
 
-	const terms = docs.filter((doc) => doc as Term) as Term[];
-
-	return terms;
+	return docs.filter((doc) => doc as Term) as Term[];
 }
 
 export async function addTerm(term: string, definition: string) {

@@ -4,10 +4,8 @@
 	import { browser } from '$app/environment';
 	import { authStore, setAuth } from '../../../../stores/auth';
 
-	import { db } from '../../../../scripts/firebaseInit';
-	import { doc, updateDoc } from 'firebase/firestore';
-	import cropImage from '../../../../scripts/cropImage';
-	import { addPfPic } from '../../../../database/pfPic';
+	import getImgUrl from '../../../../scripts/cropImage';
+	import { updatePfPic, updateUsername } from '../../../../database/users';
 
 	let usernameErr: string;
 	let pfPicErr: string;
@@ -23,9 +21,7 @@
 			if (!$authStore.user) throw new Error('Je bent niet ingelogd');
 			if (!newUsername) throw new Error('Vul een nieuwe gebruikersnaam in');
 
-			await updateDoc(doc(db, 'Users', $authStore.user.uid), {
-				username: newUsername
-			});
+			updateUsername($authStore.user.uid, newUsername);
 
 			setAuth({ user: $authStore.user, displayName: newUsername, pfPic: $authStore.pfPic });
 
@@ -53,13 +49,9 @@
 		if (!browser) return;
 		try {
 			if (!$authStore.user) throw new Error('Je bent niet ingelogd');
-			if (!imgUrl) throw new Error('Kies een nieuwe profielfoto');
+			if (!pfPicUrl) throw new Error('Kies een nieuwe profielfoto');
 
-			const url = await addPfPic($authStore.user.uid, imgUrl);
-
-			await updateDoc(doc(db, 'Users', $authStore.user.uid), {
-				pfPic: url
-			});
+			const url = await updatePfPic($authStore.user.uid, pfPicUrl);
 
 			setAuth({
 				user: $authStore.user,
@@ -82,55 +74,17 @@
 		}
 	}
 
-	function updateImgPreview() {
-		if (!pfPicInput.files) return;
+	async function updateImgPreview() {
+		if (!pfPicInput.files || !pfPicInput.files[0]) return;
 
-		const acceptedImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-		if (!acceptedImageTypes.includes(pfPicInput.files[0].type)) {
-			pfPicUrl = 'https://static.thenounproject.com/png/586340-200.png';
-			return;
+		try {
+			pfPicUrl = await getImgUrl(pfPicInput.files[0], 128, 128);
+		} catch (er) {
+			console.error(er);
 		}
-
-		const reader = new FileReader();
-
-		reader.readAsDataURL(pfPicInput.files[0]);
-
-		reader.onload = function (event) {
-			const imgElement = document.createElement('img');
-			if (!imgElement || !event.target || !event.target.result) return;
-
-			imgElement.src = event.target.result as string;
-
-			imgElement.onload = function (e) {
-				const img = e.target as CanvasImageSource;
-				if (
-					!e.target ||
-					!img.width ||
-					!img.height ||
-					typeof img.width !== 'number' ||
-					typeof img.height !== 'number'
-				)
-					return;
-
-				const canvas = document.createElement('canvas');
-				canvas.width = 128;
-				canvas.height = 128;
-
-				const ctx = canvas.getContext('2d');
-				if (!ctx) return;
-
-				cropImage(ctx, img, 0, 0, canvas.width, canvas.height);
-
-				// console.log(imgUrl);
-				imgUrl = ctx.canvas.toDataURL('image/jpg');
-			};
-		};
-
-		pfPicUrl = URL.createObjectURL(pfPicInput.files[0]);
 	}
 
 	let pfPicInput: HTMLInputElement;
-	let imgUrl: string;
 </script>
 
 {#if $authStore.user}

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Member } from '../../models/member';
-	import { getMembers } from '../../database/member';
+	import type { UserDB } from '../../models/user';
+	import { getAcceptedUsers } from '../../database/users';
 
-	let members: Member[] = [];
+	let members: UserDB[] = [];
 
 	async function awaitMembers() {
-		members = await getMembers();
+		members = await getAcceptedUsers();
 	}
 
 	awaitMembers();

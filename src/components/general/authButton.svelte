@@ -5,6 +5,7 @@
 	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 	import { db } from '../../scripts/firebaseInit';
+	import { addUser } from '../../database/users';
 	import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
 	import { doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -23,13 +24,7 @@
 			const auth = getAuth();
 			const { user } = await signInWithPopup(auth, provider);
 
-			const snapshot = await getDoc(doc(db, 'Users', user.uid));
-
-			if (!snapshot.exists())
-				await setDoc(doc(db, 'Users', user.uid), {
-					email: user.email,
-					username: user.displayName
-				});
+			addUser(user);
 		} catch (e) {
 			console.log(e);
 		}

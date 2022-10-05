@@ -5,3 +5,10 @@ export type UserType = {
 	displayName?: string;
 	pfPic?: string;
 };
+
+export type UserDB = {
+	username: string;
+	email: string;
+	pfPic?: string;
+	accepted?: boolean;
+};
