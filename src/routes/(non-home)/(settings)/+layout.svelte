@@ -36,7 +36,7 @@
 				><Fa icon={faTrashCan} class="mr-3 text-xl" />Gevarenzone</button
 			>
 		</nav>
-		<div class="w-full">
+		<div class="w-full h-full overflow-y-auto">
 			<slot />
 		</div>
 	</div>
@@ -44,6 +44,6 @@
 
 <style>
 	.wrapper {
-		height: 52vh;
+		height: 31rem;
 	}
 </style>

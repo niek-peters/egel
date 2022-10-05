@@ -13,6 +13,7 @@ import { db, storage } from '../scripts/firebaseInit';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import type { User } from 'firebase/auth';
 import type { UserDB } from '../models/user';
+import type { Links } from '../models/user';
 
 export async function addUser(user: User) {
 	const snapshot = await getDoc(doc(db, 'Users', user.uid));
@@ -22,30 +23,6 @@ export async function addUser(user: User) {
 			email: user.email,
 			username: user.displayName
 		});
-}
-
-export async function updatePfPic(uid: string, img: string): Promise<string> {
-	let url = '';
-
-	if (img) {
-		const storageRef = ref(storage, `pf_pics/${uid}`);
-
-		await uploadString(storageRef, img, 'data_url');
-
-		url = await getDownloadURL(storageRef);
-	}
-
-	await updateDoc(doc(db, 'Users', uid), {
-		pfPic: url
-	});
-
-	return url;
-}
-
-export async function updateUsername(uid: string, username: string) {
-	return await updateDoc(doc(db, 'Users', uid), {
-		username
-	});
 }
 
 export async function getUser(uid: string) {
@@ -72,4 +49,58 @@ export async function getAcceptedUsers() {
 	const docs = snapshot.docs.map((doc) => doc.data());
 
 	return docs.filter((doc) => doc as UserDB) as UserDB[];
+}
+
+export async function updatePfPic(uid: string, img: string): Promise<string> {
+	let url = '';
+
+	if (img) {
+		const storageRef = ref(storage, `pf_pics/${uid}`);
+
+		await uploadString(storageRef, img, 'data_url');
+
+		url = await getDownloadURL(storageRef);
+	}
+
+	await updateDoc(doc(db, 'Users', uid), {
+		pfPic: url
+	});
+
+	return url;
+}
+
+export async function updateUsername(uid: string, username: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		username
+	});
+}
+
+export async function updateBio(uid: string, bio: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		bio
+	});
+}
+
+export async function updateYoutube(uid: string, youtube: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'links.youtube': youtube
+	});
+}
+
+export async function updateReddit(uid: string, reddit: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'links.reddit': reddit
+	});
+}
+
+export async function updateTwitter(uid: string, twitter: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'links.twitter': twitter
+	});
+}
+
+export async function updateGithub(uid: string, github: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'links.github': github
+	});
 }

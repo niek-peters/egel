@@ -28,7 +28,10 @@ onAuthStateChanged(getAuth(), async (user) => {
 		const data = snapshot.data();
 
 		if (data) {
-			setAuth({ user, displayName: data.username, pfPic: data.pfPic });
+			setAuth({
+				user,
+				...data
+			});
 		}
 	} else setAuth({ user });
 });
