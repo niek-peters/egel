@@ -13,12 +13,13 @@ export type UserType = {
 	pfPic?: string;
 	bio?: string;
 	links?: Links;
+	accepted?: boolean;
 };
 
 export type UserDB = {
 	username: string;
 	email: string;
 	pfPic?: string;
-	accepted?: boolean;
 	links?: Links;
+	accepted?: boolean;
 };

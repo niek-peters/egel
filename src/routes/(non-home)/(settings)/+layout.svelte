@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
 	import { faAddressCard, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-	import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 	import { page } from '$app/stores';
 
@@ -22,18 +21,14 @@
 				/></a
 			>
 			<a
-				href="/profiel"
-				class="flex items-center bg-gray-200 hover:bg-gray-300 mb-2 rounded-lg h-12 pl-4 transition overflow-hidden"
-				><Fa icon={faUser} class="mr-3 text-xl" />Profiel
+				href="/gevarenzone"
+				class="flex items-center bg-gray-200 hover:bg-gray-300 text-red-600 mb-2 rounded-lg h-12 pl-4 transition overflow-hidden"
+				><Fa icon={faTrashCan} class="mr-3 text-xl" />Gevarenzone
 				<div
 					class={`${
-						$page.routeId == '(non-home)/(settings)/profiel' ? 'bg-purple-400' : ''
+						$page.routeId == '(non-home)/(settings)/gevarenzone' ? 'bg-purple-400' : ''
 					} h-full w-3 ml-auto`}
 				/></a
-			>
-			<button
-				class="flex items-center mb-2 mt-auto bg-red-300 hover:bg-red-400 rounded-lg h-12 px-4 transition"
-				><Fa icon={faTrashCan} class="mr-3 text-xl" />Gevarenzone</button
 			>
 		</nav>
 		<div class="slot w-full h-full overflow-y-auto pr-4">

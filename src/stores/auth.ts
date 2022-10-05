@@ -18,7 +18,5 @@ export async function updateAuth(user: User) {
 	const updatedUser = await getUser(user.uid);
 	if (!updatedUser) return;
 
-	console.log(updatedUser);
-
 	setAuth({ user, ...updatedUser });
 }

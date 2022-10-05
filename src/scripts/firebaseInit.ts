@@ -4,7 +4,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 // import { getAnalytics } from 'firebase/analytics';
-import { setAuth } from '../stores/auth';
+import { setAuth, updateAuth } from '../stores/auth';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyDcJ6l-KnXxk17XFbRsfNTa5gc6Xwn_Byk',
@@ -24,14 +24,6 @@ export const storage = getStorage(app);
 
 onAuthStateChanged(getAuth(), async (user) => {
 	if (user) {
-		const snapshot = await getDoc(doc(db, 'Users', user.uid));
-		const data = snapshot.data();
-
-		if (data) {
-			setAuth({
-				user,
-				...data
-			});
-		}
+		updateAuth(user);
 	} else setAuth({ user });
 });

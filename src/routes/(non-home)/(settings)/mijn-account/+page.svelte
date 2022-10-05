@@ -7,6 +7,7 @@
 		faTwitter,
 		faGithub
 	} from '@fortawesome/free-brands-svg-icons';
+	import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 	import { authStore } from '../../../../stores/auth';
 
 	import PfPic from '../../../../components/settings/pfPic.svelte';
@@ -21,13 +22,20 @@
 	<div class="flex flex-col p-8 items-center justify-center bg-gray-200/50 rounded-md">
 		<div class="flex items-center justify-center">
 			<div class="relative flex flex-col items-center justify-center mr-6">
-				<h2 class="text-4xl mb-2">
+				<h2 class="flex items-center gap-2 text-4xl mb-2">
+					{#if $authStore.accepted}
+						<div class="accepted relative flex items-center justify-center rounded-full">
+							<Fa icon={faCheckCircle} class="text-purple-400" />
+						</div>
+					{/if}
 					<b>{$authStore.username || $authStore.user.displayName}</b>
 				</h2>
-				<h4 class="flex items-center justify-center text-lg">
-					<Fa icon={faGoogle} class="text-lg text-gray-500 mr-2" />
-					{$authStore.user.displayName}
-				</h4>
+				{#if $authStore.user.displayName !== $authStore.username}
+					<h4 class="flex items-center justify-center text-lg">
+						<Fa icon={faGoogle} class="text-lg text-gray-500 mr-2" />
+						{$authStore.user.displayName}
+					</h4>
+				{/if}
 				{#if $authStore.links}
 					<div class="absolute -bottom-10 flex justify-center w-3/5 gap-2">
 						{#if $authStore.links.youtube}
@@ -69,3 +77,26 @@
 		<Links />
 	</div>
 {/if}
+
+<style lang="scss">
+	.accepted {
+		&::after {
+			content: 'Erkend Egel lid';
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			top: -3.25rem;
+			font-size: 1rem;
+			white-space: nowrap;
+			border-radius: 0.5rem;
+			width: 8rem;
+			background-color: rgb(209 213 219);
+			opacity: 0;
+			transition: opacity 150ms ease;
+		}
+
+		&:hover::after {
+			opacity: 1;
+		}
+	}
+</style>

@@ -4,10 +4,7 @@
 	import { faArrowRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons';
 	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
-	import { db } from '../../scripts/firebaseInit';
-	import { addUser } from '../../database/users';
-	import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
-	import { doc, getDoc, setDoc } from 'firebase/firestore';
+	import { loginWithGoogle, logout } from '../../scripts/auth';
 
 	import { authStore } from '../../stores/auth';
 	import { onMount } from 'svelte';
@@ -16,32 +13,6 @@
 	import { page } from '$app/stores';
 
 	let menuEl: HTMLUListElement;
-
-	async function loginWithGoogle() {
-		try {
-			const provider = new GoogleAuthProvider();
-
-			const auth = getAuth();
-			const { user } = await signInWithPopup(auth, provider);
-
-			addUser(user);
-		} catch (e) {
-			console.log(e);
-		}
-	}
-
-	async function logout() {
-		try {
-			const auth = getAuth();
-			await signOut(auth);
-
-			authStore.set({ user: null });
-		} catch (e) {
-			console.log(e);
-		} finally {
-			if ($page.routeId?.includes('(non-home)/(settings)')) goto('/');
-		}
-	}
 
 	onMount(() => {
 		window.onclick = closeMenu;
@@ -68,7 +39,7 @@
 			<button
 				class="flex justify-between items-center font-semibold"
 				on:click|stopPropagation={toggleMenu}
-				>{$authStore.displayName || $authStore.user.displayName}
+				>{$authStore.username || $authStore.user.displayName}
 				{#if $authStore.pfPic || $authStore.user.photoURL}
 					<img
 						class="w-10 h-10 rounded-full ml-4"
@@ -95,7 +66,7 @@
 				</li>
 				<li
 					class="flex items-center cursor-pointer hover:text-gray-600 transition"
-					on:click|preventDefault={logout}
+					on:click|preventDefault={() => logout($page.routeId || '/')}
 					on:click={closeMenu}
 				>
 					<Fa icon={faArrowRightFromBracket} class="mr-3" />Uitloggen

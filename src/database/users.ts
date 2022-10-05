@@ -7,13 +7,14 @@ import {
 	query,
 	getDocs,
 	orderBy,
-	where
+	where,
+	deleteField,
+	deleteDoc
 } from 'firebase/firestore';
 import { db, storage } from '../scripts/firebaseInit';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import type { User } from 'firebase/auth';
 import type { UserDB } from '../models/user';
-import type { Links } from '../models/user';
 
 export async function addUser(user: User) {
 	const snapshot = await getDoc(doc(db, 'Users', user.uid));
@@ -103,4 +104,17 @@ export async function updateGithub(uid: string, github: string) {
 	return await updateDoc(doc(db, 'Users', uid), {
 		'links.github': github
 	});
+}
+
+export async function resetUser(user: User) {
+	return await updateDoc(doc(db, 'Users', user.uid), {
+		links: deleteField(),
+		bio: deleteField(),
+		pfPic: deleteField(),
+		username: user.displayName
+	});
+}
+
+export async function deleteUser(uid: string) {
+	return await deleteDoc(doc(db, 'Users', uid));
 }
