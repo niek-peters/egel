@@ -10,7 +10,7 @@
 		if (!imgInput.files || !imgInput.files[0]) return;
 
 		try {
-			setImg(await getImgUrl(imgInput.files[0], 128, 128));
+			setImg(await getImgUrl(imgInput.files[0], 427, 240));
 		} catch (er) {
 			console.error(er);
 		}
