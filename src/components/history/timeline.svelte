@@ -6,7 +6,7 @@
 	import Entry from './entry.svelte';
 
 	import type { Event } from '../../models/event';
-	import { formatDate } from '../../models/event';
+	import { formatDate } from '../../scripts/formatDate';
 	import { Timestamp } from 'firebase/firestore';
 
 	onMount(() => {

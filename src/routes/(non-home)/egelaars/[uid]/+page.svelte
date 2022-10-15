@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
-	import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+	import { faCheckCircle, faClock } from '@fortawesome/free-regular-svg-icons';
+	import { faGamepad, faPaintBrush, faPerson } from '@fortawesome/free-solid-svg-icons';
 	import { faYoutube, faTwitter, faReddit, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 	import { page } from '$app/stores';
@@ -9,9 +10,10 @@
 
 	import type { PostType } from '../../../../models/post';
 	import { getUser } from '../../../../database/users';
+	import { formatDate } from '../../../../scripts/formatDate';
 
 	import FullCard from '../../../../components/general/fullCard.svelte';
-	import PfPic from '../../../../components/settings/pfPic.svelte';
+	import PfPic from '../../../../components/user/pfPic.svelte';
 	import Line from '../../../../components/general/line.svelte';
 	import WideLine from '../../../../components/general/wideLine.svelte';
 	import Gallery from '../../../../components/user/gallery.svelte';
@@ -65,13 +67,13 @@
 {#if loaded}
 	{#if user}
 		<FullCard title={'Egelaar Profiel: ' + user.username}>
-			<div class="wrapper flex flex-col gap-12">
+			<div class="wrapper flex flex-col gap-12 items-center">
 				<div class="flex w-full gap-8 justify-between">
 					<div class="flex flex-col w-2/5">
 						<div
 							class="flex flex-col py-8 gap-4 items-center justify-center bg-gray-200/50 rounded-lg"
 						>
-							<PfPic />
+							<PfPic pfPicUrl={user.pfPic} />
 							<h2 class="flex items-center gap-2 text-4xl mb-2">
 								{#if user.accepted}
 									<div class="accepted relative flex items-center justify-center rounded-full">
@@ -107,7 +109,7 @@
 							{/if}
 						</div>
 					</div>
-					<div class="flex flex-col items-center w-7/12 pt-6">
+					<div class="flex flex-col w-7/12 pt-6">
 						{#if user.bio}
 							<div>
 								<h3 class="font-semibold">Over mij:</h3>
@@ -129,9 +131,44 @@
 						{/if}
 					</div>
 				</div>
-				<div class="flex flex-col items-center">
-					<h2 class="text-2xl font-semibold -mb-4">Posts van {user.username}</h2>
-					<Line color="bg-gray-200" />
+				{#if user.other}
+					<div class="flex justify-center gap-32 w-full">
+						{#if user.other.memberSince}
+							<div class="flex flex-col items-center gap-1">
+								<h5 class="flex items-center text-xl font-semibold gap-2">
+									<Fa icon={faClock} />Egelaar sinds:
+								</h5>
+								<p class="text-lg">{formatDate(user.other?.memberSince)}</p>
+							</div>
+						{/if}
+						{#if user.other.realName}
+							<div class="flex flex-col items-center gap-1">
+								<h5 class="flex items-center text-xl font-semibold gap-2">
+									<Fa icon={faPerson} />Echte naam:
+								</h5>
+								<p class="text-lg">{user.other.realName}</p>
+							</div>
+						{/if}
+						{#if user.other.favoriteGame}
+							<div class="flex flex-col items-center gap-1">
+								<h5 class="flex items-center text-xl font-semibold gap-2">
+									<Fa icon={faGamepad} />Favoriete game:
+								</h5>
+								<p class="text-lg">{user.other.favoriteGame}</p>
+							</div>
+						{:else if user.other.hobby}
+							<div class="flex flex-col items-center gap-1">
+								<h5 class="flex items-center text-xl font-semibold gap-2">
+									<Fa icon={faPaintBrush} />Hobby:
+								</h5>
+								<p class="text-lg">{user.other.hobby}</p>
+							</div>
+						{/if}
+					</div>
+				{/if}
+				<Line color="bg-gray-200" />
+				<div class="flex flex-col items-center gap-6 -mt-6">
+					<h2 class="text-2xl font-semibold">Posts van {user.username}</h2>
 					<Gallery {posts} />
 				</div>
 			</div>

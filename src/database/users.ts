@@ -46,8 +46,12 @@ export async function getAcceptedUsers() {
 	);
 
 	const snapshot = await getDocs(q);
-
-	const docs = snapshot.docs.map((doc) => doc.data());
+	const docs = snapshot.docs.map((doc) => {
+		return {
+			uid: doc.id,
+			...doc.data()
+		};
+	});
 
 	return docs.filter((doc) => doc as UserDB) as UserDB[];
 }
@@ -103,6 +107,30 @@ export async function updateTwitter(uid: string, twitter: string) {
 export async function updateGithub(uid: string, github: string) {
 	return await updateDoc(doc(db, 'Users', uid), {
 		'links.github': github
+	});
+}
+
+export async function updateMemberSince(uid: string, memberSince: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'other.memberSince': memberSince
+	});
+}
+
+export async function updateRealName(uid: string, realName: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'other.realName': realName
+	});
+}
+
+export async function updateFavoriteGame(uid: string, favoriteGame: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'other.favoriteGame': favoriteGame
+	});
+}
+
+export async function updateHobby(uid: string, hobby: string) {
+	return await updateDoc(doc(db, 'Users', uid), {
+		'other.hobby': hobby
 	});
 }
 

@@ -1,75 +1,72 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
-	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 	import { faCheck, faXmark, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 	import { browser } from '$app/environment';
 	import { authStore, updateAuth } from '../../../stores/auth';
 
-	import { updateYoutube } from '../../../database/users';
+	import { updateMemberSince } from '../../../database/users';
+	import { faClock } from '@fortawesome/free-regular-svg-icons';
 
-	let youtubeErr: string;
-	let youtube: string;
-	let youtubeChanged: boolean = false;
+	let memberSinceErr: string;
+	let memberSince: string;
+	let memberSinceChanged: boolean = false;
 
-	async function changeYoutube() {
+	async function changeMemberSince() {
 		if (!browser) return;
 		try {
 			if (!$authStore.user) throw new Error('Je bent niet ingelogd');
-			if (!youtube) throw new Error('Vul een YouTube url in');
+			if (!memberSince) throw new Error('Vul de datum in waarop je lid werd');
 
-			updateYoutube($authStore.user.uid, youtube);
+			updateMemberSince($authStore.user.uid, memberSince);
 
 			updateAuth($authStore.user);
 
 			// Reset all inputs and errors
-			youtube = youtubeErr = '';
+			memberSince = memberSinceErr = '';
 
-			youtubeChanged = true;
+			memberSinceChanged = true;
 
 			setTimeout(() => {
-				youtubeChanged = false;
+				memberSinceChanged = false;
 			}, 2000);
 		} catch (er) {
 			if (er instanceof Error) {
-				youtubeChanged = false;
-				youtubeErr = er.message;
+				memberSinceChanged = false;
+				memberSinceErr = er.message;
 
-				console.error(youtubeErr);
+				console.error(memberSinceErr);
 
 				setTimeout(() => {
-					youtubeErr = '';
+					memberSinceErr = '';
 				}, 2000);
 			}
 		}
 	}
 </script>
 
-<form class="flex items-center justify-between gap-2" on:submit|preventDefault={changeYoutube}>
-	<label for="youtube" class="flex w-8 justify-center"
-		><Fa icon={faYoutube} class="text-3xl text-red-500 mr-2" /></label
-	>
-
+<form class="flex items-center justify-between" on:submit|preventDefault={changeMemberSince}>
+	<label for="memberSince"><Fa icon={faClock} class="text-3xl" /></label>
 	<div class="flex">
 		<input
-			id="youtube"
+			id="memberSince"
 			class="p-2 h-8 text-sm rounded-l-md my-2 outline-none border-transparent focus:border-gray-400 border-2 transition w-52"
-			type="url"
-			placeholder="YouTube kanaal url"
+			type="date"
+			placeholder="De datum waarop je lid werd"
 			required
-			bind:value={youtube}
+			bind:value={memberSince}
 			minlength="3"
 			maxlength="255"
 		/>
 		<button
-			class={`${youtubeErr ? 'bg-red-400 hover:bg-red-400' : ''} ${
-				youtubeChanged ? 'bg-green-400 hover:bg-green-400' : ''
+			class={`${memberSinceErr ? 'bg-red-400 hover:bg-red-400' : ''} ${
+				memberSinceChanged ? 'bg-green-400 hover:bg-green-400' : ''
 			} flex items-center justify-center w-10 h-8 text-lg rounded-r-lg my-2 text-white bg-purple-400 hover:bg-purple-500 transition`}
-			>{#if youtubeErr}
+			>{#if memberSinceErr}
 				<p class="flex justify-center items-center">
 					<Fa icon={faXmark} class="mr-2 text-lg" />
 				</p>
-			{:else if youtubeChanged}
+			{:else if memberSinceChanged}
 				<p class="flex justify-center items-center">
 					<Fa icon={faCheck} class="mr-2 text-lg" />
 				</p>

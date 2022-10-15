@@ -10,10 +10,11 @@
 	import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 	import { authStore } from '../../../../stores/auth';
 
-	import PfPic from '../../../../components/settings/pfPic.svelte';
-	import Username from '../../../../components/settings/username.svelte';
-	import Bio from '../../../../components/settings/bio.svelte';
-	import Links from '../../../../components/settings/links.svelte';
+	import PfPic from '../../../../components/settings/changePfPic.svelte';
+	import Username from '../../../../components/settings/changeUsername.svelte';
+	import Bio from '../../../../components/settings/changeBio.svelte';
+	import Links from '../../../../components/settings/changeLink.svelte';
+	import Other from '../../../../components/settings/changeOther.svelte';
 
 	$: $authStore, console.log($authStore);
 </script>
@@ -75,6 +76,7 @@
 		<Username />
 		<Bio />
 		<Links />
+		<Other />
 	</div>
 {/if}
 

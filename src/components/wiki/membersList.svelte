@@ -6,6 +6,8 @@
 
 	async function awaitMembers() {
 		members = await getAcceptedUsers();
+
+		console.log(members);
 	}
 
 	awaitMembers();
@@ -26,7 +28,7 @@
 			<ul class="grid grid-cols-5 w-full -mb-4">
 				{#each members as member}
 					<li class="flex items-center justify-center p-8 text-xl font-semibold">
-						{member.username}
+						<a href={`/egelaars/${member.uid}`}>{member.username}</a>
 					</li>
 				{/each}
 			</ul>

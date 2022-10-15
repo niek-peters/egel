@@ -16,7 +16,7 @@
 		if (!browser) return;
 		try {
 			if (!$authStore.user) throw new Error('Je bent niet ingelogd');
-			if (!reddit) throw new Error('Vul een YouTube url in');
+			if (!reddit) throw new Error('Vul een Reddit url in');
 
 			updateReddit($authStore.user.uid, reddit);
 
@@ -45,32 +45,36 @@
 	}
 </script>
 
-<form class="flex items-center justify-between" on:submit|preventDefault={changeReddit}>
-	<label for="reddit"><Fa icon={faReddit} class="text-3xl text-orange-600 mr-2" /></label>
-	<input
-		id="reddit"
-		class="p-2 h-8 text-sm rounded-l-md my-2 outline-none border-transparent focus:border-gray-400 border-2 transition w-52"
-		type="url"
-		placeholder="Reddit profiel url"
-		required
-		bind:value={reddit}
-		minlength="3"
-		maxlength="255"
-	/>
-	<button
-		class={`${redditErr ? 'bg-red-400 hover:bg-red-400' : ''} ${
-			redditChanged ? 'bg-green-400 hover:bg-green-400' : ''
-		} flex items-center justify-center w-10 h-8 text-lg rounded-r-lg my-2 text-white bg-purple-400 hover:bg-purple-500 transition`}
-		>{#if redditErr}
-			<p class="flex justify-center items-center">
-				<Fa icon={faXmark} class="mr-2 text-lg" />
-			</p>
-		{:else if redditChanged}
-			<p class="flex justify-center items-center">
-				<Fa icon={faCheck} class="mr-2 text-lg" />
-			</p>
-		{:else}
-			<Fa icon={faPaperPlane} class="mr-2 text-lg" />
-		{/if}</button
+<form class="flex items-center justify-between gap-2" on:submit|preventDefault={changeReddit}>
+	<label for="reddit" class="flex w-8 justify-center"
+		><Fa icon={faReddit} class="text-3xl text-orange-600 mr-2" /></label
 	>
+	<div class="flex">
+		<input
+			id="reddit"
+			class="p-2 h-8 text-sm rounded-l-md my-2 outline-none border-transparent focus:border-gray-400 border-2 transition w-52"
+			type="url"
+			placeholder="Reddit profiel url"
+			required
+			bind:value={reddit}
+			minlength="3"
+			maxlength="255"
+		/>
+		<button
+			class={`${redditErr ? 'bg-red-400 hover:bg-red-400' : ''} ${
+				redditChanged ? 'bg-green-400 hover:bg-green-400' : ''
+			} flex items-center justify-center w-10 h-8 text-lg rounded-r-lg my-2 text-white bg-purple-400 hover:bg-purple-500 transition`}
+			>{#if redditErr}
+				<p class="flex justify-center items-center">
+					<Fa icon={faXmark} class="mr-2 text-lg" />
+				</p>
+			{:else if redditChanged}
+				<p class="flex justify-center items-center">
+					<Fa icon={faCheck} class="mr-2 text-lg" />
+				</p>
+			{:else}
+				<Fa icon={faPaperPlane} class="mr-2 text-lg" />
+			{/if}</button
+		>
+	</div>
 </form>
