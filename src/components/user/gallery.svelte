@@ -10,7 +10,6 @@
 	let col1Posts: PostType[] = [];
 	let col2Posts: PostType[] = [];
 
-	$: $postsStore, console.log('postsStore:', $postsStore);
 	$: $postsStore, fillGallery();
 
 	async function fillGallery() {
@@ -68,10 +67,6 @@
 		loaded = true;
 
 		filling = false;
-
-		// console.log('posts', $postsStore);
-		// console.log('col1Posts', col1Posts);
-		// console.log('col2Posts', col2Posts);
 	}
 </script>
 
