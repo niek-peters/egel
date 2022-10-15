@@ -144,9 +144,13 @@ export async function resetUser(user: User) {
 }
 
 export async function deleteUser(uid: string) {
-	const storageRef = ref(storage, `pf_pics/${uid}`);
+	try {
+		const storageRef = ref(storage, `pf_pics/${uid}`);
 
-	await deleteObject(storageRef);
+		await deleteObject(storageRef);
+	} catch (_e) {
+		console.log('Gebruiker had geen profielfoto');
+	}
 
 	return await deleteDoc(doc(db, 'Users', uid));
 }

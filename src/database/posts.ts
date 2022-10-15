@@ -6,6 +6,7 @@ import {
 	getDocs,
 	orderBy,
 	query,
+	setDoc,
 	Timestamp,
 	where
 } from 'firebase/firestore';
@@ -17,15 +18,17 @@ import { ulid } from 'ulid';
 export async function addPost(post: PostDB) {
 	let url = '';
 
+	const uid = ulid();
+
 	if (post.imgUrl) {
-		const storageRef = ref(storage, `posts/${ulid()}`);
+		const storageRef = ref(storage, `posts/${uid}`);
 
 		await uploadString(storageRef, post.imgUrl, 'data_url');
 
 		url = await getDownloadURL(storageRef);
 	}
 
-	await addDoc(collection(db, 'Posts'), {
+	await setDoc(doc(db, 'Posts', uid), {
 		ownerUid: post.ownerUid,
 		title: post.title,
 		imgUrl: url,
@@ -51,9 +54,13 @@ export async function getUserPosts(uid: string) {
 }
 
 export async function deletePost(uid: string) {
-	const storageRef = ref(storage, `posts/${uid}`);
+	try {
+		const storageRef = ref(storage, `posts/${uid}`);
 
-	await deleteObject(storageRef);
+		if (storageRef) await deleteObject(storageRef);
+	} catch (_e) {
+		console.log('Post bevatte geen foto');
+	}
 
 	return await deleteDoc(doc(db, 'Posts', uid));
 }

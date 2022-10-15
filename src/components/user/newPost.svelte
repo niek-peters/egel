@@ -46,6 +46,19 @@
 			return;
 		}
 
+		if (videoUrl) {
+			// Check if the video url is valid
+			const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+			const match = videoUrl.match(regex);
+
+			if (!match) {
+				success = '';
+				newPostError = 'De video url is niet geldig!';
+				setTimeout(() => (newPostError = ''), 2000);
+				return;
+			}
+		}
+
 		await addPost({
 			ownerUid: $authStore.user.uid,
 			title,

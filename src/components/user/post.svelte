@@ -18,7 +18,7 @@
 		if (!$authStore.user) return;
 
 		if (confirm('Weet je zeker dat je deze post wilt verwijderen?')) {
-			deletePost(uid);
+			await deletePost(uid);
 
 			reloadPosts($authStore.user.uid);
 		}

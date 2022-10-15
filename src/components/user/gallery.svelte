@@ -69,9 +69,9 @@
 
 		filling = false;
 
-		console.log('posts', $postsStore);
-		console.log('col1Posts', col1Posts);
-		console.log('col2Posts', col2Posts);
+		// console.log('posts', $postsStore);
+		// console.log('col1Posts', col1Posts);
+		// console.log('col2Posts', col2Posts);
 	}
 </script>
 
