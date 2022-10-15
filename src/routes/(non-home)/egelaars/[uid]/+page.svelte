@@ -36,14 +36,14 @@
 
 		myProfile = $authStore.user != null && $page.params.uid == $authStore.user.uid;
 
+		getPosts();
+
 		loaded = true;
 	}
 
 	async function getPosts() {
 		setPosts(await getUserPosts($page.params.uid));
 	}
-
-	getPosts();
 </script>
 
 <FullCard title={!loaded ? 'Profiel laden...' : user ? 'Egelaar: ' + user.username : 'Helaas...'}>
