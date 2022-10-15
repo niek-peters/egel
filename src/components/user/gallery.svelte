@@ -2,15 +2,23 @@
 	import Post from './post.svelte';
 	import type { PostType } from '../../models/post';
 	import { postsStore } from '../../stores/posts';
+	import { browser } from '$app/environment';
 
 	let loaded = false;
+	let filling = false;
 
 	let col1Posts: PostType[] = [];
 	let col2Posts: PostType[] = [];
 
+	$: $postsStore, console.log('postsStore:', $postsStore);
 	$: $postsStore, fillGallery();
 
 	async function fillGallery() {
+		if (!browser) return;
+		if (filling) return;
+
+		filling = true;
+
 		col1Posts = [];
 		col2Posts = [];
 
@@ -58,6 +66,8 @@
 		}
 
 		loaded = true;
+
+		filling = false;
 
 		console.log('posts', $postsStore);
 		console.log('col1Posts', col1Posts);
