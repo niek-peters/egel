@@ -40,6 +40,55 @@ export default async function getImageUrl(imgFile: File, width = 64, height = 64
 	});
 }
 
+export async function getImageUrlNoCrop(imgFile: File, max = 64) {
+	if (!(imgFile as File)) return Promise.reject('No image file');
+
+	if (!['image/jpg', 'image/jpeg', 'image/png'].includes(imgFile.type))
+		return 'https://static.thenounproject.com/png/586340-200.png';
+
+	return new Promise<string>((res, rej) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(imgFile);
+		reader.onload = function (event) {
+			const imgElement = document.createElement('img');
+			if (!imgElement || !event.target || !event.target.result)
+				return rej("Couldn't create image element");
+
+			imgElement.src = event.target.result as string;
+
+			imgElement.onload = function (e) {
+				const img = e.target as CanvasImageSource;
+				if (
+					!e.target ||
+					!img.width ||
+					!img.height ||
+					typeof img.width !== 'number' ||
+					typeof img.height !== 'number'
+				)
+					return rej("Couldn't load image");
+
+				const ratio = img.width / img.height;
+				const canvas = document.createElement('canvas');
+
+				if (img.width > img.height) {
+					canvas.width = max;
+					canvas.height = max / ratio;
+				} else {
+					canvas.height = max;
+					canvas.width = max * ratio;
+				}
+
+				const ctx = canvas.getContext('2d');
+				if (!ctx) return rej("Couldn't get context");
+
+				drawImage(ctx, img, 0, 0, canvas.width, canvas.height);
+
+				res(ctx.canvas.toDataURL('image/jpg'));
+			};
+		};
+	});
+}
+
 function drawImage(
 	ctx: CanvasRenderingContext2D,
 	img: CanvasImageSource,

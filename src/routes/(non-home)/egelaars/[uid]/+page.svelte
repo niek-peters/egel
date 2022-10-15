@@ -9,60 +9,41 @@
 	import type { UserDB } from 'src/models/user';
 	import { onMount } from 'svelte';
 
-	import type { PostType } from '../../../../models/post';
+	import { getUserPosts } from '../../../../database/posts';
 	import { getUser } from '../../../../database/users';
 	import { formatDate } from '../../../../scripts/formatDate';
+	import { authStore } from '../../../../stores/auth';
+	import { setPosts } from '../../../../stores/posts';
 
 	import FullCard from '../../../../components/general/fullCard.svelte';
 	import PfPic from '../../../../components/user/pfPic.svelte';
 	import Line from '../../../../components/general/line.svelte';
 	import WideLine from '../../../../components/general/wideLine.svelte';
 	import Gallery from '../../../../components/user/gallery.svelte';
+	import NewPost from '../../../../components/user/newPost.svelte';
 
 	let user: UserDB;
 	let loaded = false;
+	let myProfile = false;
 
-	onMount(async () => {
+	onMount(load);
+	$: $page.params.uid, load();
+	$: $authStore, load();
+
+	async function load() {
 		const temp = await getUser($page.params.uid);
 		if (temp) user = temp;
 
-		loaded = true;
-	});
+		myProfile = $authStore.user != null && $page.params.uid == $authStore.user.uid;
 
-	const posts: PostType[] = [
-		{
-			imgUrl:
-				'https://images.unsplash.com/photo-1630259986871-eb113ee68f61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGJhY2tkcm9wfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-			title: 'My first post',
-			description: 'This is my first post on my profile. I hope you like it!'
-		},
-		{
-			videoUrl: 'https://www.youtube.com/watch?v=TwIEvgidyyM',
-			title: 'My first post',
-			description: 'This is my first post on my profile. I hope you like it!'
-		},
-		{
-			imgUrl: 'https://joshcollinsworth.com/images/post_images/sveltekit-learn.png',
-			title: 'My first post',
-			description: 'This is my first post on my profile. I hope you like it!'
-		},
-		{
-			imgUrl:
-				'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmuI13cSUGG66lfLEB8ffXOd184PQ3G8MkMA&usqp=CAU',
-			title: 'My first post',
-			description: 'This is my first post on my profile. I hope you like it!'
-		},
-		{
-			imgUrl: 'https://joshcollinsworth.com/images/post_images/sveltekit-learn.png',
-			title: 'My first post',
-			description: 'This is my first post on my profile. I hope you like it!'
-		},
-		{
-			imgUrl: 'https://joshcollinsworth.com/images/post_images/sveltekit-learn.png',
-			title: 'My first post',
-			description: 'This is my first post on my profile. I hope you like it!'
-		}
-	];
+		loaded = true;
+	}
+
+	async function getPosts() {
+		setPosts(await getUserPosts($page.params.uid));
+	}
+
+	getPosts();
 </script>
 
 <FullCard title={!loaded ? 'Profiel laden...' : user ? 'Egelaar: ' + user.username : 'Helaas...'}>
@@ -167,9 +148,16 @@
 				</div>
 			{/if}
 			<Line color="bg-gray-200" />
-			<div class="flex flex-col items-center gap-6 -mt-6">
-				<h2 class="text-2xl font-semibold">Posts van {user.username}</h2>
-				<Gallery {posts} />
+			<div class="w-full flex flex-col items-center gap-6 -mt-6">
+				<div class="flex flex-col items-center w-full gap-2">
+					<h2 class="text-2xl font-semibold">
+						{myProfile ? 'Jouw posts' : `Posts van ${user.username}`}
+					</h2>
+					{#if myProfile}
+						<NewPost />
+					{/if}
+				</div>
+				<Gallery />
 			</div>
 		</div>
 	{:else if loaded}

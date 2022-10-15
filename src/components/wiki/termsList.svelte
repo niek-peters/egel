@@ -37,7 +37,7 @@
 			{#each terms as word}
 				<details class="w-full mb-4 bg-gray-300/20 rounded-lg transition">
 					<summary
-						class=" list-none cursor-pointer text-lg font-semibold"
+						class="list-none cursor-pointer text-lg font-semibold"
 						on:click={toggleDefinition}
 						on:mouseenter={toggleHover}
 						on:mouseleave={toggleHover}

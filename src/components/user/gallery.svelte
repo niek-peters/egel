@@ -1,40 +1,35 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import Post from './post.svelte';
 	import type { PostType } from '../../models/post';
+	import { postsStore } from '../../stores/posts';
 
-	export let posts: PostType[];
 	let loaded = false;
 
 	let col1Posts: PostType[] = [];
 	let col2Posts: PostType[] = [];
 
-	onMount(async () => {
+	$: $postsStore, fillGallery();
+
+	async function fillGallery() {
+		col1Posts = [];
+		col2Posts = [];
+
 		let col1Skips = 0;
 		let col2Skips = 0;
 
-		console.log(posts);
-
-		for (let i = 0; i < posts.length; i++) {
-			const imgUrl = posts[i].imgUrl;
-
-			console.log('col1', col1Skips);
-			console.log('col2', col2Skips);
+		for (let i = 0; i < $postsStore.length; i++) {
+			const imgUrl = $postsStore[i].imgUrl;
 
 			if (col1Skips) {
-				console.log('col2');
-				col2Posts = [...col2Posts, posts[i]];
+				col2Posts = [...col2Posts, $postsStore[i]];
 				col1Skips--;
 			} else if (col2Skips) {
-				console.log('col1');
-				col1Posts = [...col1Posts, posts[i]];
+				col1Posts = [...col1Posts, $postsStore[i]];
 				col2Skips--;
 			} else if (i % 2 === 0) {
-				console.log('col1');
-				col1Posts = [...col1Posts, posts[i]];
+				col1Posts = [...col1Posts, $postsStore[i]];
 			} else {
-				console.log('col2');
-				col2Posts = [...col2Posts, posts[i]];
+				col2Posts = [...col2Posts, $postsStore[i]];
 			}
 
 			if (imgUrl) {
@@ -60,19 +55,18 @@
 					img.src = imgUrl;
 				});
 			}
-
-			console.log('i', i);
 		}
 
-		console.log(col1Posts);
-		console.log(col2Posts);
-
 		loaded = true;
-	});
+
+		console.log('posts', $postsStore);
+		console.log('col1Posts', col1Posts);
+		console.log('col2Posts', col2Posts);
+	}
 </script>
 
 {#if loaded}
-	<div class="flex gap-8">
+	<div class="w-full flex gap-8">
 		<div class="flex flex-col gap-8 w-1/2">
 			{#each col1Posts as post}
 				{#if post.imgUrl}

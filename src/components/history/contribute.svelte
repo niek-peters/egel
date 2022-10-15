@@ -102,9 +102,3 @@
 		<ImgButton />
 	</form>
 </div>
-
-<style lang="scss">
-	.popup {
-		height: inherit;
-	}
-</style>
