@@ -29,7 +29,9 @@
 							<Fa icon={faCheckCircle} class="text-purple-400" />
 						</div>
 					{/if}
-					<b>{$authStore.username || $authStore.user.displayName}</b>
+					<a class="font-bold" href={`/egelaars/${$authStore.user.uid}`}
+						>{$authStore.username || $authStore.user.displayName}</a
+					>
 				</h2>
 				{#if $authStore.user.displayName !== $authStore.username}
 					<h4 class="flex items-center justify-center text-lg">

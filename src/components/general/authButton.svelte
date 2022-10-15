@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
-	import { faUser } from '@fortawesome/free-regular-svg-icons';
-	import { faArrowRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons';
+	import { faArrowRightFromBracket, faGear, faUser } from '@fortawesome/free-solid-svg-icons';
 	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 	import { loginWithGoogle, logout } from '../../scripts/auth';
@@ -59,17 +58,29 @@
 			>
 				<li
 					class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition"
+					on:click={() => goto(`/egelaars/${$authStore.user.uid}`)}
+					on:click={closeMenu}
+				>
+					<div class="w-8 flex justify-center"><Fa icon={faUser} class="mr-3" /></div>
+					Mijn Profiel
+				</li>
+				<li
+					class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition"
 					on:click={() => goto('/mijn-account')}
 					on:click={closeMenu}
 				>
-					<Fa icon={faGear} class="mr-3" />Instellingen
+					<div class="w-8 flex justify-center"><Fa icon={faGear} class="mr-3" /></div>
+					Instellingen
 				</li>
 				<li
 					class="flex items-center cursor-pointer hover:text-gray-600 transition"
 					on:click|preventDefault={() => logout($page.routeId || '/')}
 					on:click={closeMenu}
 				>
-					<Fa icon={faArrowRightFromBracket} class="mr-3" />Uitloggen
+					<div class="w-8 flex justify-center">
+						<Fa icon={faArrowRightFromBracket} class="mr-3" />
+					</div>
+					Uitloggen
 				</li>
 			</ul>
 		</div>
