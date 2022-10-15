@@ -80,9 +80,19 @@
 		<div class="flex flex-col gap-8 w-1/2">
 			{#each col1Posts as post}
 				{#if post.imgUrl}
-					<Post imgUrl={post.imgUrl} title={post.title} description={post.description} />
+					<Post
+						uid={post.uid}
+						imgUrl={post.imgUrl}
+						title={post.title}
+						description={post.description}
+					/>
 				{:else if post.videoUrl}
-					<Post videoUrl={post.videoUrl} title={post.title} description={post.description} />
+					<Post
+						uid={post.uid}
+						videoUrl={post.videoUrl}
+						title={post.title}
+						description={post.description}
+					/>
 				{/if}
 			{/each}
 		</div>
@@ -90,9 +100,19 @@
 		<div class="flex flex-col gap-8 w-1/2">
 			{#each col2Posts as post}
 				{#if post.imgUrl}
-					<Post imgUrl={post.imgUrl} title={post.title} description={post.description} />
+					<Post
+						uid={post.uid}
+						imgUrl={post.imgUrl}
+						title={post.title}
+						description={post.description}
+					/>
 				{:else if post.videoUrl}
-					<Post videoUrl={post.videoUrl} title={post.title} description={post.description} />
+					<Post
+						uid={post.uid}
+						videoUrl={post.videoUrl}
+						title={post.title}
+						description={post.description}
+					/>
 				{/if}
 			{/each}
 		</div>

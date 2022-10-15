@@ -1,10 +1,20 @@
-import { addDoc, collection, getDocs, orderBy, query, Timestamp, where } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	getDocs,
+	orderBy,
+	query,
+	Timestamp,
+	where
+} from 'firebase/firestore';
 import { db, storage } from '../scripts/firebaseInit';
-import { ref, uploadString, getDownloadURL } from 'firebase/storage';
-import type { PostType } from '../models/post';
+import { ref, uploadString, getDownloadURL, deleteObject } from 'firebase/storage';
+import type { PostDB, PostType } from '../models/post';
 import { ulid } from 'ulid';
 
-export async function addPost(post: PostType) {
+export async function addPost(post: PostDB) {
 	let url = '';
 
 	if (post.imgUrl) {
@@ -30,7 +40,20 @@ export async function getUserPosts(uid: string) {
 
 	const snapshot = await getDocs(q);
 
-	const docs = snapshot.docs.map((doc) => doc.data());
+	const docs = snapshot.docs.map((doc) => {
+		return {
+			uid: doc.id,
+			...doc.data()
+		};
+	});
 
 	return docs.filter((doc) => doc as PostType) as PostType[];
+}
+
+export async function deletePost(uid: string) {
+	const storageRef = ref(storage, `posts/${uid}`);
+
+	await deleteObject(storageRef);
+
+	return await deleteDoc(doc(db, 'Posts', uid));
 }

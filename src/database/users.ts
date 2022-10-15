@@ -12,7 +12,7 @@ import {
 	deleteDoc
 } from 'firebase/firestore';
 import { db, storage } from '../scripts/firebaseInit';
-import { ref, uploadString, getDownloadURL } from 'firebase/storage';
+import { ref, uploadString, getDownloadURL, deleteObject } from 'firebase/storage';
 import type { User } from 'firebase/auth';
 import type { UserDB } from '../models/user';
 
@@ -144,5 +144,9 @@ export async function resetUser(user: User) {
 }
 
 export async function deleteUser(uid: string) {
+	const storageRef = ref(storage, `pf_pics/${uid}`);
+
+	await deleteObject(storageRef);
+
 	return await deleteDoc(doc(db, 'Users', uid));
 }

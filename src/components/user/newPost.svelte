@@ -5,11 +5,11 @@
 	import { page } from '$app/stores';
 	import { authStore } from '../../stores/auth';
 	import { setImg, imgStore } from '../../stores/imgStore';
-	import { addPost, getUserPosts } from '../../database/posts';
+	import { addPost } from '../../database/posts';
 
 	import ImgButton from './imgButtonDynamic.svelte';
 	import { Timestamp } from 'firebase/firestore';
-	import { setPosts, postsStore } from '../../stores/posts';
+	import { postsStore, reloadPosts } from '../../stores/posts';
 
 	let title: string;
 	let description: string;
@@ -55,7 +55,7 @@
 			date: Timestamp.now()
 		});
 
-		setPosts(await getUserPosts($page.params.uid));
+		reloadPosts($page.params.uid);
 
 		console.log($postsStore);
 

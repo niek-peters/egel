@@ -9,11 +9,10 @@
 	import type { UserDB } from 'src/models/user';
 	import { onMount } from 'svelte';
 
-	import { getUserPosts } from '../../../../database/posts';
 	import { getUser } from '../../../../database/users';
 	import { formatDate } from '../../../../scripts/formatDate';
 	import { authStore } from '../../../../stores/auth';
-	import { setPosts } from '../../../../stores/posts';
+	import { reloadPosts } from '../../../../stores/posts';
 
 	import FullCard from '../../../../components/general/fullCard.svelte';
 	import PfPic from '../../../../components/user/pfPic.svelte';
@@ -32,17 +31,19 @@
 
 	async function load() {
 		const temp = await getUser($page.params.uid);
-		if (temp) user = temp;
+
+		if (!temp) {
+			loaded = true;
+			return;
+		}
+
+		user = temp;
 
 		myProfile = $authStore.user != null && $page.params.uid == $authStore.user.uid;
 
-		getPosts();
+		reloadPosts($page.params.uid);
 
 		loaded = true;
-	}
-
-	async function getPosts() {
-		setPosts(await getUserPosts($page.params.uid));
 	}
 </script>
 

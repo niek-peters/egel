@@ -1,14 +1,31 @@
 <script lang="ts">
+	import Fa from 'svelte-fa';
+	import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+
+	import { getEmbedUrl } from '../../scripts/ytEmbedUrl';
+	import { deletePost } from '../../database/posts';
+	import { reloadPosts } from '../../stores/posts';
+	import { authStore } from '../../stores/auth';
+
+	export let uid: string;
+	export let title: string;
+	export let description: string;
+
 	export let imgUrl: string = '';
 	export let videoUrl: string = '';
 
-	export let title: string = '';
-	export let description: string = '';
+	async function processDelete() {
+		if (!$authStore.user) return;
 
-	import { getEmbedUrl } from '../../scripts/ytEmbedUrl';
+		if (confirm('Weet je zeker dat je deze post wilt verwijderen?')) {
+			deletePost(uid);
+
+			reloadPosts($authStore.user.uid);
+		}
+	}
 </script>
 
-<div class="flex flex-col justify-center p-4 bg-gray-200 rounded-lg shadow-lg">
+<div class="relative flex flex-col justify-center p-4 bg-gray-200 rounded-lg shadow-lg">
 	{#if imgUrl}
 		<img src={imgUrl} class="image w-full rounded-md" alt="post" />
 	{:else if videoUrl}
@@ -28,4 +45,10 @@
 	{#if description}
 		<p class="text-lg">{description}</p>
 	{/if}
+	<button on:click={processDelete}>
+		<Fa
+			icon={faTrashCan}
+			class="absolute top-3 right-3 text-2xl text-red-500 hover:text-red-600 cursor-pointer"
+		/>
+	</button>
 </div>
