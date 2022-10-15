@@ -29,10 +29,3 @@
 		<p class="text-lg">{description}</p>
 	{/if}
 </div>
-
-<style>
-	.image {
-		max-height: 700px;
-		object-fit: cover;
-	}
-</style>
