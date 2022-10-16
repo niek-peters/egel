@@ -6,6 +6,7 @@
 	import { deletePost } from '../../database/posts';
 	import { reloadPosts } from '../../stores/posts';
 	import { authStore } from '../../stores/auth';
+	import { page } from '$app/stores';
 
 	export let uid: string;
 	export let title: string;
@@ -45,10 +46,12 @@
 	{#if description}
 		<p class="text-lg">{description}</p>
 	{/if}
-	<button on:click={processDelete}>
-		<Fa
-			icon={faTrashCan}
-			class="absolute top-3 right-3 text-2xl text-red-500 hover:text-red-600 cursor-pointer"
-		/>
-	</button>
+	{#if $authStore.user != null && $page.params.uid == $authStore.user.uid}
+		<button on:click={processDelete}>
+			<Fa
+				icon={faTrashCan}
+				class="absolute top-3 right-3 text-2xl text-red-500 hover:text-red-600 cursor-pointer"
+			/>
+		</button>
+	{/if}
 </div>
