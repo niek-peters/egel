@@ -22,14 +22,19 @@
 	import NewPost from '../../../../components/user/newPost.svelte';
 
 	let user: UserDB;
-	let loaded = false;
 	let myProfile = false;
+
+	let loaded = false;
+	let loading = false;
 
 	onMount(load);
 	$: $page.params.uid, load();
 	$: $authStore, load();
 
 	async function load() {
+		if (loading) return;
+		loading = true;
+
 		const temp = await getUser($page.params.uid);
 
 		if (!temp) {
@@ -44,6 +49,7 @@
 		reloadPosts($page.params.uid);
 
 		loaded = true;
+		loading = false;
 	}
 </script>
 

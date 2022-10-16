@@ -9,6 +9,13 @@ export function setPosts(posts: PostType[]) {
 	postsStore.set(posts);
 }
 
+export function resetPosts() {
+	postsStore.set([]);
+}
+
 export async function reloadPosts(uid: string) {
-	setPosts(await getUserPosts(uid));
+	resetPosts();
+
+	const posts = await getUserPosts(uid);
+	setPosts(posts);
 }
