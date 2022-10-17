@@ -6,9 +6,8 @@
 	import ImgCard from '../../components/general/imgCard.svelte';
 	import Line from '../../components/general/line.svelte';
 
-	import Link from '../../components/general/link.svelte';
-
-	import TeamCard from '../../components/general/teamCard.svelte';
+	import MembersList from '../../components/wiki/membersList.svelte';
+	import Timeline from '../../components/history/timeline.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -24,19 +23,19 @@
 			<div class="flex justify-center w-fit">
 				<a
 					class="flex justify-center items-center w-fit text-xl text-white bg-gray-700 hover:bg-gray-800 transition rounded-full py-1 px-4 m-2"
-					href="/"
+					href="/nieuws"
 				>
 					<Fa class="mr-3" icon={faNewspaper} /> Nieuws <Fa class="ml-3" icon={faChevronRight} />
 				</a>
 				<a
 					class="flex justify-center items-center w-fit text-xl text-purple-600 hover:text-purple-800 transition py-1 px-4 m-2"
-					href="/geschiedenis#tijdlijn"
+					href="#tijdlijn"
 				>
 					<Fa class="mr-3" icon={faHourglass} /> Tijdlijn <Fa class="ml-3" icon={faChevronRight} />
 				</a>
 				<a
 					class="flex justify-center items-center w-fit text-xl text-purple-600 hover:text-purple-800 transition py-1 px-4 m-2"
-					href="/wiki#leden"
+					href="#leden"
 				>
 					<Fa class="mr-3" icon={faUser} /> Leden <Fa class="ml-3" icon={faChevronRight} />
 				</a>
@@ -50,6 +49,20 @@
 	</article>
 	<div style="margin-bottom: 84vh;" />
 	<Line />
+
+	<!-- History -->
+	<Timeline />
+
+	<!-- Discord Widget -->
+	<div class="relative flex flex-col items-center bg-gray-200 w-full">
+		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
+		<Line color="bg-gray-300" />
+
+		<MembersList />
+
+		<Line color="bg-gray-300" />
+		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
+	</div>
 	<!-- Community and Gamers -->
 	<div class="relative flex flex-col items-center w-full">
 		<ImgCard img="/egelleeft.png" title="Egel Community"
@@ -63,7 +76,6 @@
 			</p></ImgCard
 		>
 		<Line />
-		<div class="background1 absolute bottom-0 h-96 w-full -z-40" />
 		<ImgCard img="/egelgamers.jpg" title="Egel Gamers" right
 			><p>
 				Een groot deel van de Egel Community bestaat uit gamers. De meeste hiervan komen uit de
@@ -74,121 +86,6 @@
 			</p></ImgCard
 		>
 	</div>
-	<!-- Discord Widget -->
-	<div class="relative flex flex-col items-center bg-gray-200 w-full">
-		<Line color="bg-gray-300" />
-		<article class="relative flex justify-between my-12 2xl:w-3/5 sm:w-4/5">
-			<div class="w-1/3">
-				<h1 class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3">
-					Onze Discord server
-				</h1>
-				<p class="text-lg">
-					De Egel Community heeft ook een Discord server! Hier kunt u de online leden van de server
-					zien. Interesse om deel te nemen? Neem contact op met: egelblad@gmail.com.
-					<br /><br />
-					De Discord server is ons hoofdkwartier, hier worden al onze snode plannen gesmeed. Hier spelen
-					we onze favoriete games en houden we gezellige gesprekken. Het is dé online hangplek voor de
-					Egel Community!
-				</p>
-			</div>
-			<iframe
-				class="w-3/5 h-96 shadow-2xl"
-				src="https://discord.com/widget?id=614885752207310879&theme=dark"
-				title="Discord Widget"
-				allowtransparency={true}
-				frameborder="0"
-				sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-			/>
-		</article>
-
-		<Line color="bg-gray-300" />
-		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
-	</div>
-	<!-- Developer team card -->
-	<TeamCard
-		title="Egel Developers"
-		teamMembers={[
-			{
-				name: 'MeneerValk',
-				img: '/meneervalk.png'
-			},
-			{
-				name: 'Milanutje',
-				img: '/milanutje.png'
-			},
-			{
-				name: 'Motrix',
-				img: '/motrix.png'
-			},
-			{
-				name: 'Goeloes',
-				img: '/goeloes.png'
-			}
-		]}
-	>
-		<p>
-			Binnen de Egel Community hebben we ook ons eigen developer team! Makers van
-			<Link title="Egelblad" url="https://niek.coderschool.eu/" blank />, <Link
-				title="Egelbank"
-				url="https://dev.egelbank.nl/"
-				blank
-			/>, <Link
-				title="Egel Mods Installer"
-				url="https://github.com/Egel-Developers/egel-mods-installer"
-				blank
-			/>, deze website en nog veel meer!
-		</p>
-	</TeamCard>
-
-	<Line />
-	<!-- Creators card -->
-	<TeamCard
-		title="Egel Creators"
-		teamMembers={[
-			{
-				name: 'Wouter van der Ven',
-				img: '/wouter.png'
-			},
-			{
-				name: 'Milanutje',
-				img: '/milanutje.png'
-			},
-			{
-				name: 'Motrix',
-				img: '/motrix.png'
-			},
-			{
-				name: 'Bogdan',
-				img: '/bogdan.jpg'
-			}
-		]}
-	>
-		<p>
-			Naast developers hebben we ook creatief talent! Deze leden hebben stukken gecomponeerd en
-			geremixt als
-			<Link
-				title="Kernenergie"
-				url="https://open.spotify.com/track/7yDWbmBBHzy2CWFRojeTbn?si=99e282145268426c"
-				blank
-			/>,
-			<Link title="J.O.R.N.A" url="https://www.youtube.com/watch?v=MalS05AYzxo" blank />,
-			<Link title="Gnoerks OST" url="https://www.youtube.com/watch?v=15wC98k9ujo" blank />,
-			<Link title="Joep Remix" url="https://www.youtube.com/watch?v=ikWX_cCDaSU" blank />
-			en
-			<Link title="Meindert Remix" url="https://www.youtube.com/watch?v=dD1tov0H8cM" blank />
-			. Naast muziek zijn er ook video's gemaakt als
-			<Link title="Ceaseless" url="https://www.youtube.com/watch?v=7HBZ_6j4maY" blank />,
-			<Link title="Buurman en Buurman" url="https://www.youtube.com/watch?v=mT2yGQxk-lY" blank />,
-			<Link title="Compromised Trailer" url="https://www.youtube.com/watch?v=5m8TZo3jPYo" blank />,
-			<Link title="De Achterblijvers" url="https://www.youtube.com/watch?v=pi84ZXaCgHk" blank />,
-			<Link title="Egel Nieuws" url="https://www.youtube.com/watch?v=r2rns2vXI80" blank />
-
-			en
-			<Link title="SCP-SL Compilations" url="https://www.youtube.com/watch?v=7hTUwwgzHE8" blank />
-			. Ten slotte ook nog
-			<Link title="geweldige artikelen van Bogdan" url="https://niek.coderschool.eu/" blank />.
-		</p>
-	</TeamCard>
 </main>
 
 <style>

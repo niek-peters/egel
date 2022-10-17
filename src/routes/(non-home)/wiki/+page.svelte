@@ -3,10 +3,9 @@
 	import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 	import Line from '../../../components/general/line.svelte';
-	import TeamCard from '../../../components/general/teamCard.svelte';
+	import Groups from '../../../components/groups/groups.svelte';
 
 	import TermsList from '../../../components/wiki/termsList.svelte';
-	import MembersList from '../../../components/wiki/membersList.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -38,81 +37,33 @@
 	<div class="flex flex-col items-center relative w-full my-12 bg-gray-200">
 		<Line color="bg-gray-300" />
 		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
-		<MembersList />
+
+		<article class="relative flex justify-between 2xl:w-3/5 sm:w-4/5">
+			<div class="w-1/3">
+				<h1 class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3">
+					Onze Discord server
+				</h1>
+				<p class="text-lg">
+					De Egel Community heeft ook een Discord server! <br /> Het is ons hoofdkwartier. Hier worden
+					al onze snode plannen gesmeed, spelen we onze favoriete games en houden we gezellige gesprekken.
+					Het is dé online hangplek voor de Egel Community! Hier kunt u de online leden van de server
+					zien.
+				</p>
+			</div>
+			<iframe
+				class="w-3/5 h-96 shadow-2xl"
+				src="https://discord.com/widget?id=614885752207310879&theme=dark"
+				title="Discord Widget"
+				allowtransparency={true}
+				frameborder="0"
+				sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+			/>
+		</article>
+
 		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
 		<Line color="bg-gray-300" />
 	</div>
-	<TeamCard
-		title="Egel Gamers"
-		teamMembers={[
-			{
-				name: 'MeneerValk',
-				img: '/meneervalk.png'
-			},
-			{
-				name: 'Bogdan',
-				img: '/bogdan.jpg'
-			},
-			{
-				name: 'Motrix',
-				img: '/motrix.png'
-			},
-			{
-				name: 'Goeloes',
-				img: '/goeloes.png'
-			},
-			{
-				name: 'Goeloes',
-				img: '/goeloes.png'
-			},
-			{
-				name: 'Goeloes',
-				img: '/goeloes.png'
-			},
-			{
-				name: 'Goeloes',
-				img: '/goeloes.png'
-			},
-			{
-				name: 'Goeloes',
-				img: '/goeloes.png'
-			}
-		]}
-	>
-		<p>
-			Een groot deel van de Egel Community bestaat uit gamers. De meeste hiervan komen uit de groep
-			originele Egelaars uit de 1e klas. Samen spelen we games als CS:GO, Minecraft, Hearts of Iron
-			4 en SCP Secret Laboratory. We houden vaak vriendelijke toernooien of spelen 's avonds
-			gezellig samen.
-		</p>
-	</TeamCard>
-	<Line />
-	<TeamCard
-		title="The Noob Group (aka The Next Generation)"
-		teamMembers={[
-			{
-				name: 'Keindert',
-				img: '/goeloes.png'
-			},
-			{
-				name: 'Wouter van der Ven',
-				img: '/wouter.png'
-			},
-			{
-				name: 'Jarvis',
-				img: '/goeloes.png'
-			},
-			{
-				name: 'Joep',
-				img: '/goeloes.png'
-			}
-		]}
-	>
-		<p>
-			Een groep vrienden waarvan de meesten bij elkaar in een 3 VWO klas zaten, die grotendeels
-			tijdens de 4e klas bij de Egel Community zijn gegaan.
-		</p>
-	</TeamCard>
+	<Groups />
 </main>
 
 <style lang="scss">

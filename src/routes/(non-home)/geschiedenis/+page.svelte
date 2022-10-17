@@ -43,34 +43,6 @@
 		<div class="background2 absolute -bottom-96 h-96 w-full -z-40" />
 		<Line color="bg-gray-300" />
 	</div>
-
-	<TeamCard
-		title="Egel Historians"
-		teamMembers={[
-			{
-				name: 'MeneerValk',
-				img: '/meneervalk.png'
-			},
-			{
-				name: 'Bogdan',
-				img: '/bogdan.jpg'
-			},
-			{
-				name: 'Motrix',
-				img: '/motrix.png'
-			},
-			{
-				name: 'Goeloes',
-				img: '/goeloes.png'
-			}
-		]}
-	>
-		<p>
-			De geschiedenis schrijft zichzelf niet! Dankzij deze leden is de geschiedenis van Egel
-			bijgehouden en opgeschreven. Als je vragen hebt over de geschiedenis van Egel, weet je bij wie
-			je moet zijn.
-		</p>
-	</TeamCard>
 </main>
 
 <style lang="scss">

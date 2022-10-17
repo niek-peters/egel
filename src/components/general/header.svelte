@@ -17,9 +17,9 @@
 		>
 		<a
 			class={`${
-				$page.routeId == '(non-home)/geschiedenis' ? 'border-gray-200' : 'border-transparent'
+				$page.routeId == '(non-home)/nieuws' ? 'border-gray-200' : 'border-transparent'
 			} mx-4 border-b hover:text-gray-200 hover:border-gray-200 transition`}
-			href="/geschiedenis">Geschiedenis</a
+			href="/nieuws">Nieuws</a
 		>
 		<a
 			class={`${
