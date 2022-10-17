@@ -3,7 +3,7 @@
 	import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
 
 	import Line from '../../../components/general/line.svelte';
-	import LgCard from '../../../components/general/lgCard.svelte';
+	import LgCard from '../../../components/general/cards/lgCard.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">

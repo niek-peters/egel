@@ -3,14 +3,14 @@
 	import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 	import { onMount } from 'svelte';
-	import { getHistory } from '../../database/history';
+	import { getHistory } from '../../../database/history';
 
 	import TimeLabel from './timeLabel.svelte';
 	import Entry from './entry.svelte';
 	import Contribute from './contribute.svelte';
 
-	import type { Event } from '../../models/event';
-	import { formatDate } from '../../scripts/formatDate';
+	import type { Event } from '../../../models/event';
+	import { formatDate } from '../../../scripts/formatDate';
 	import { Timestamp } from 'firebase/firestore';
 
 	let toggleBtn: HTMLButtonElement;
@@ -42,7 +42,7 @@
 	let slider: HTMLInputElement;
 </script>
 
-<div class="2xl:w-3/5 sm:w-4/5 my-12" on:click={focusSlider} id="tijdlijn">
+<div class="2xl:w-3/5 sm:w-4/5 my-12" on:click={focusSlider}>
 	<h2 class="flex justify-between text-4xl font-semibold mb-4 border-b border-gray-200 pb-3">
 		Tijdlijn
 		<button

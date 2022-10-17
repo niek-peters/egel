@@ -2,7 +2,7 @@
 	import Fa from 'svelte-fa';
 	import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-	import FullCard from '../general/fullCard.svelte';
+	import FullCard from '../general/cards/fullCard.svelte';
 	import { getTerms } from '../../database/terms';
 	import type { Term } from '../../models/term';
 

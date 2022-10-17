@@ -1,7 +1,7 @@
 <script>
 	import Line from '../general/line.svelte';
 	import Link from '../general/link.svelte';
-	import TeamCard from '../general/teamCard.svelte';
+	import TeamCard from '../general/cards/teamCard.svelte';
 </script>
 
 <!-- Developer team card -->

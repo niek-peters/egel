@@ -7,7 +7,7 @@
 	import { setImg, imgStore } from '../../stores/imgStore';
 	import { addPost } from '../../database/posts';
 
-	import ImgButton from './imgButtonDynamic.svelte';
+	import ImgButton from '../general/imgButtonDynamic.svelte';
 	import { Timestamp } from 'firebase/firestore';
 	import { postsStore, reloadPosts } from '../../stores/posts';
 

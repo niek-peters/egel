@@ -3,11 +3,11 @@
 	import { faNewspaper, faHourglass, faUser } from '@fortawesome/free-regular-svg-icons';
 	import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-	import ImgCard from '../../components/general/imgCard.svelte';
+	import ImgCard from '../../components/general/cards/imgCard.svelte';
 	import Line from '../../components/general/line.svelte';
 
-	import MembersList from '../../components/wiki/membersList.svelte';
-	import Timeline from '../../components/history/timeline.svelte';
+	import MembersList from '../../components/about/membersList.svelte';
+	import Timeline from '../../components/about/history/timeline.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -48,13 +48,13 @@
 		/>
 	</article>
 	<div style="margin-bottom: 84vh;" />
-	<Line />
+	<Line id="tijdlijn" />
 
 	<!-- History -->
 	<Timeline />
 
 	<!-- Discord Widget -->
-	<div class="relative flex flex-col items-center bg-gray-200 w-full">
+	<div class="relative flex flex-col items-center bg-gray-200 w-full" id="leden">
 		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
 		<Line color="bg-gray-300" />
 

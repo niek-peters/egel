@@ -14,7 +14,7 @@
 	import { authStore } from '../../../../stores/auth';
 	import { reloadPosts } from '../../../../stores/posts';
 
-	import FullCard from '../../../../components/general/fullCard.svelte';
+	import FullCard from '../../../../components/general/cards/fullCard.svelte';
 	import PfPic from '../../../../components/user/pfPic.svelte';
 	import Line from '../../../../components/general/line.svelte';
 	import WideLine from '../../../../components/general/wideLine.svelte';

@@ -3,9 +3,9 @@
 	import { faArrowRightFromBracket, faGear, faUser } from '@fortawesome/free-solid-svg-icons';
 	import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
-	import { loginWithGoogle, logout } from '../../scripts/auth';
+	import { loginWithGoogle, logout } from '../../../scripts/auth';
 
-	import { authStore } from '../../stores/auth';
+	import { authStore } from '../../../stores/auth';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 

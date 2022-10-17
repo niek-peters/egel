@@ -1,6 +1,6 @@
 <script lang="ts">
-	import FullCard from '../general/fullCard.svelte';
-	import SquareImg from '../about/squareImg.svelte';
+	import FullCard from './fullCard.svelte';
+	import SquareImg from '../../about/squareImg.svelte';
 
 	export let title: string = 'Egelaars';
 

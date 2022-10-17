@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { addHistory } from '../../database/history';
+	import { addHistory } from '../../../database/history';
 
-	import ImgButton from './imgButton.svelte';
-	import { imgStore, setImg } from '../../stores/imgStore';
+	import ImgButton from '../../general/imgButton.svelte';
+	import { imgStore, setImg } from '../../../stores/imgStore';
 
 	async function submitHistory() {
 		// If we are missing data, don't submit it
