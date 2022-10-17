@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Fa from 'svelte-fa';
 	import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-	import { fade } from 'svelte/transition';
+	// import { fade } from 'svelte/transition';
 
 	import { onMount } from 'svelte';
 
@@ -113,14 +113,13 @@
 			>
 				<Fa icon={faAngleLeft} class="text-4xl mx-8" />
 			</button>
-			{#each [news[current].image] as src (current)}
-				<img
-					transition:fade
-					class="absolute aspect-video w-full h-full object-cover"
-					{src}
-					alt="Nieuwsfoto"
-				/>
-			{/each}
+			<!-- {#each [news[current].image] as src (current)} -->
+			<img
+				class="absolute aspect-video w-full h-full object-cover"
+				src={news[current].image}
+				alt="Nieuwsfoto"
+			/>
+			<!-- {/each} -->
 			<button
 				class="absolute right-0 h-full text-gray-400 hover:bg-white/10 transition z-10"
 				on:click={cycleNext}
