@@ -103,7 +103,7 @@
 </script>
 
 <section
-	class="slider flex justify-between rounded-lg 2xl:w-3/5 sm:w-4/5 my-12 bg-gray-200 overflow-hidden"
+	class="slider flex justify-between rounded-lg 2xl:w-4/5 sm:w-10/12 my-12 bg-gray-200 overflow-hidden"
 >
 	<div class="flex w-full h-full">
 		<div class="relative flex items-center w-2/3">
@@ -150,16 +150,16 @@
 			</div>
 			<h2
 				bind:this={title}
-				class="text-3xl font-semibold mb-4 border-b border-gray-300 pb-3 transition"
+				class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3 transition"
 			>
 				{news[current].title}
 			</h2>
-			<p class="transition" bind:this={description}>{news[current].description}</p>
+			<p class="transition text-lg" bind:this={description}>{news[current].description}</p>
 			<div class="flex flex-col mt-auto text-gray-500 transition" bind:this={other}>
-				<p class="text-sm font-semibold">
+				<p class="text-lg font-semibold">
 					{news[current].location} | {news[current].date}
 				</p>
-				<a href={`/egelaars/${news[current].authorId}`} class="text-sm hover:underline"
+				<a href={`/egelaars/${news[current].authorId}`} class="text-lg hover:underline"
 					>{news[current].author}</a
 				>
 			</div>
@@ -169,6 +169,6 @@
 
 <style>
 	.slider {
-		height: 30rem;
+		height: 36rem;
 	}
 </style>
