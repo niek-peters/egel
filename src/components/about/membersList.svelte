@@ -1,19 +1,21 @@
 <script lang="ts">
+	import Fa from 'svelte-fa';
+	import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 	import type { UserDB } from '../../models/user';
 	import { getAcceptedUsers } from '../../database/users';
+	import { authStore } from '../../stores/auth';
 
 	let members: UserDB[] = [];
 
 	async function awaitMembers() {
 		members = await getAcceptedUsers();
-
-		console.log(members);
 	}
 
 	awaitMembers();
 </script>
 
-<div class="2xl:w-3/5 sm:w-4/5">
+<div class="2xl:w-3/5 sm:w-4/5 my-12">
 	<article class="w-full mb-12">
 		<h1 class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3">
 			Leden van de Egel Community
@@ -25,11 +27,25 @@
 	</article>
 	<div class="flex justify-between">
 		{#if members.length}
-			<ul class="grid grid-cols-5 w-full -mb-4">
+			<ul class="grid grid-cols-4 w-full -mb-4 gap-4">
 				{#each members as member}
-					<li class="flex items-center justify-center p-8 text-xl font-semibold">
-						<a href={`/egelaars/${member.uid}`}>{member.username}</a>
-					</li>
+					<a
+						href={`/egelaars/${member.uid}`}
+						class="flex items-center gap-2 p-2 text-xl font-semibold hover:bg-gray-300/50 rounded-lg transition"
+					>
+						{#if member.pfPic}
+							<img src={member.pfPic} class="w-12 rounded-full" alt="Profile Pic" />
+						{:else}
+							<div
+								class="flex items-center justify-center text-xl w-12 h-12 rounded-full bg-purple-300"
+							>
+								<Fa icon={faUser} />
+							</div>
+						{/if}
+						<p class={`${$authStore.username == member.username ? 'text-purple-500' : ''}`}>
+							{member.username}
+						</p>
+					</a>
 				{/each}
 			</ul>
 		{:else}

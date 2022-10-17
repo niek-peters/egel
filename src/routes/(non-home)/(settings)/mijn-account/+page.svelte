@@ -16,7 +16,7 @@
 	import Links from '../../../../components/settings/changeLink.svelte';
 	import Other from '../../../../components/settings/changeOther.svelte';
 
-	$: $authStore, console.log($authStore);
+	// $: $authStore, console.log($authStore);
 </script>
 
 {#if $authStore.user}
