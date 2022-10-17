@@ -19,9 +19,13 @@ import type { UserDB } from '../models/user';
 export async function addUser(user: User) {
 	const snapshot = await getDoc(doc(db, 'Users', user.uid));
 
-	await updateDoc(doc(db, 'Users', user.uid), {
-		pfPic: user.photoURL
-	});
+	const foundUser = snapshot.data();
+
+	if (foundUser && !foundUser.pfPic) {
+		await updateDoc(doc(db, 'Users', user.uid), {
+			pfPic: user.photoURL
+		});
+	}
 
 	if (!snapshot.exists())
 		await setDoc(doc(db, 'Users', user.uid), {
