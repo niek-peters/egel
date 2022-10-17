@@ -13,6 +13,7 @@
 	import { formatDate } from '../../../../scripts/formatDate';
 	import { authStore } from '../../../../stores/auth';
 	import { reloadPosts } from '../../../../stores/posts';
+	import { postsStore } from '../../../../stores/posts';
 
 	import FullCard from '../../../../components/general/cards/fullCard.svelte';
 	import PfPic from '../../../../components/user/pfPic.svelte';
@@ -163,7 +164,7 @@
 					</h2>
 					{#if myProfile}
 						<NewPost />
-					{:else}
+					{:else if !$postsStore.length}
 						<p class="text-xl mt-8">Er is hier nog niks gepost...</p>
 					{/if}
 				</div>
