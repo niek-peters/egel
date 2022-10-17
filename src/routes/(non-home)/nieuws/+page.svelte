@@ -4,6 +4,7 @@
 
 	import Line from '../../../components/general/line.svelte';
 	import LgCard from '../../../components/general/cards/lgCard.svelte';
+	import Slider from '../../../components/news/slider.svelte';
 </script>
 
 <main class="flex flex-col items-center w-full">
@@ -31,6 +32,7 @@
 	</div>
 	<div style="margin-bottom: 84vh;" />
 	<Line />
+	<Slider />
 	<LgCard>nieuws lol</LgCard>
 </main>
 
