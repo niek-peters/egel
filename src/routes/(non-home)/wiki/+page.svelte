@@ -33,7 +33,7 @@
 	</div>
 	<div style="margin-bottom: 84vh;" />
 
-	<Line />
+	<Line id="termen" />
 	<TermsList />
 
 	<!-- Discord Widget -->

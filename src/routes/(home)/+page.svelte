@@ -1,6 +1,11 @@
 <script>
 	import Fa from 'svelte-fa';
-	import { faNewspaper, faHourglass, faUser } from '@fortawesome/free-regular-svg-icons';
+	import {
+		faNewspaper,
+		faHourglass,
+		faUser,
+		faFileLines
+	} from '@fortawesome/free-regular-svg-icons';
 	import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 	import ImgCard from '../../components/general/cards/imgCard.svelte';
@@ -39,6 +44,12 @@
 					href="#leden"
 				>
 					<Fa class="mr-3" icon={faUser} /> Leden <Fa class="ml-3" icon={faChevronRight} />
+				</a>
+				<a
+					class="flex justify-center items-center w-fit text-xl text-purple-600 hover:text-purple-800 transition py-1 px-4 m-2"
+					href="/wiki#termen"
+				>
+					<Fa class="mr-3" icon={faFileLines} /> Termen <Fa class="ml-3" icon={faChevronRight} />
 				</a>
 			</div>
 		</div>
