@@ -34,7 +34,7 @@
 	<LgCard>nieuws lol</LgCard>
 </main>
 
-<style lang="scss">
+<!-- <style lang="scss">
 	.background1 {
 		background-image: -webkit-linear-gradient(95deg, rgb(229 231 235) 50%, white 50.3%);
 	}
@@ -42,4 +42,4 @@
 	.background2 {
 		background-image: -webkit-linear-gradient(95deg, white 50%, rgb(229 231 235) 50.3%);
 	}
-</style>
+</style> -->

@@ -15,7 +15,7 @@
 	import { reloadPosts } from '../../../../stores/posts';
 	import { postsStore } from '../../../../stores/posts';
 
-	import FullCard from '../../../../components/general/cards/fullCard.svelte';
+	import LgCard from '../../../../components/general/cards/lgCard.svelte';
 	import PfPic from '../../../../components/user/pfPic.svelte';
 	import Line from '../../../../components/general/line.svelte';
 	import WideLine from '../../../../components/general/wideLine.svelte';
@@ -54,7 +54,7 @@
 	}
 </script>
 
-<FullCard title={!loaded ? 'Profiel laden...' : user ? 'Egelaar: ' + user.username : 'Helaas...'}>
+<LgCard>
 	{#if user}
 		<div class="wrapper flex flex-col gap-12 items-center">
 			<div class="flex w-full gap-8 justify-between">
@@ -181,7 +181,7 @@
 			<Circle color="#9CA3AF" />
 		</div>
 	{/if}
-</FullCard>
+</LgCard>
 
 <style>
 	.wrapper {
