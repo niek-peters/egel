@@ -33,7 +33,10 @@
 	<div style="margin-bottom: 84vh;" />
 	<Line />
 	<Slider />
-	<LgCard>nieuws lol</LgCard>
+	<Line />
+	<LgCard
+		>Hier komt nieuws<br /><br />Wat veel nieuws zeg<br /><br />Wauw<br /><br />Gaaf hier</LgCard
+	>
 </main>
 
 <!-- <style lang="scss">
