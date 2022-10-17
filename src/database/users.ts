@@ -19,10 +19,15 @@ import type { UserDB } from '../models/user';
 export async function addUser(user: User) {
 	const snapshot = await getDoc(doc(db, 'Users', user.uid));
 
+	await updateDoc(doc(db, 'Users', user.uid), {
+		pfPic: user.photoURL
+	});
+
 	if (!snapshot.exists())
 		await setDoc(doc(db, 'Users', user.uid), {
 			email: user.email,
-			username: user.displayName
+			username: user.displayName,
+			pfPic: user.photoURL
 		});
 }
 

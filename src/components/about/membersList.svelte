@@ -2,6 +2,8 @@
 	import Fa from 'svelte-fa';
 	import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+	import Link from '../general/link.svelte';
+
 	import type { UserDB } from '../../models/user';
 	import { getAcceptedUsers } from '../../database/users';
 	import { authStore } from '../../stores/auth';
@@ -22,7 +24,8 @@
 		</h1>
 		<p class="text-lg">
 			Hier zie je een lijst van erkende leden van de Egel Community. Wil jij hier ook tussen staan?
-			Log dan in op deze site en vraag in de Discord server of we je kunnen toevoegen.
+			Log dan in op deze site en vraag in de <Link url="/wiki#discord" title="Discord" /> server of we
+			je kunnen toevoegen.
 		</p>
 	</article>
 	<div class="flex justify-between">

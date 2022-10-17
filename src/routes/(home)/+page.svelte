@@ -5,6 +5,7 @@
 
 	import ImgCard from '../../components/general/cards/imgCard.svelte';
 	import Line from '../../components/general/line.svelte';
+	import Link from '../../components/general/link.svelte';
 
 	import MembersList from '../../components/about/membersList.svelte';
 	import Timeline from '../../components/about/history/timeline.svelte';
@@ -53,7 +54,7 @@
 	<!-- History -->
 	<Timeline />
 
-	<!-- Discord Widget -->
+	<!-- Ledenlijst -->
 	<div class="relative flex flex-col items-center bg-gray-200 w-full" id="leden">
 		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
 		<Line color="bg-gray-300" />
@@ -67,12 +68,16 @@
 	<div class="relative flex flex-col items-center w-full">
 		<ImgCard img="/egelleeft.png" title="Egel Community"
 			><p>
-				De Egel Community is een grote vriendengroep van Egelaars, voornamelijk van het Pantarijn
-				MHV in Wageningen. We hebben we een hechte band met elkaar en houden ervan om samen feestjes
-				te houden of gewoon lekker te chillen.
+				De Egel Community is een grote vriendengroep van Egelaars, voornamelijk van het <Link
+					title="Pantarijn
+				MHV in Wageningen"
+					url="https://www.pantarijn.nl/wageningenmhv"
+				/>. We hebben we een hechte band met elkaar en houden ervan om samen feestjes te houden of
+				gewoon lekker te chillen.
 				<br />
-				Deze vriendengroep heeft een rijke geschiedenis, beginnend in de 1e klas in 2017. Door de jaren
-				heen is de groep flink gegroeid: tegenwoordig hebben we meer dan 40 leden!
+				Deze vriendengroep heeft een rijke <Link title="geschiedenis" url="#tijdlijn" />, beginnend
+				in de 1e klas in 2017. Door de jaren heen is de groep flink gegroeid: tegenwoordig hebben we
+				meer dan 40 leden!
 			</p></ImgCard
 		>
 		<Line />

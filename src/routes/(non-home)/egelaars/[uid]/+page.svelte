@@ -120,7 +120,7 @@
 				</div>
 			</div>
 			{#if user.other}
-				<div class="flex justify-center gap-32 w-full">
+				<div class="flex justify-center gap-24 w-full">
 					{#if user.other.memberSince}
 						<div class="flex flex-col items-center gap-1">
 							<h5 class="flex items-center text-xl font-semibold gap-2">
@@ -144,7 +144,8 @@
 							</h5>
 							<p class="text-lg">{user.other.favoriteGame}</p>
 						</div>
-					{:else if user.other.hobby}
+					{/if}
+					{#if user.other.hobby}
 						<div class="flex flex-col items-center gap-1">
 							<h5 class="flex items-center text-xl font-semibold gap-2">
 								<Fa icon={faPaintBrush} />Hobby:
@@ -162,6 +163,8 @@
 					</h2>
 					{#if myProfile}
 						<NewPost />
+					{:else}
+						<p class="text-xl mt-8">Er is hier nog niks gepost...</p>
 					{/if}
 				</div>
 				<Gallery />

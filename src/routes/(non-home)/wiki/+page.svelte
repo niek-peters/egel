@@ -32,9 +32,12 @@
 		</article>
 	</div>
 	<div style="margin-bottom: 84vh;" />
+
 	<Line />
 	<TermsList />
-	<div class="flex flex-col items-center relative w-full my-12 bg-gray-200">
+
+	<!-- Discord Widget -->
+	<div class="flex flex-col items-center relative w-full my-12 bg-gray-200" id="discord">
 		<Line color="bg-gray-300" />
 		<div class="background1 absolute -top-96 h-96 w-full -z-40" />
 
