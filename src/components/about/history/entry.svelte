@@ -1,4 +1,6 @@
 <script lang="ts">
+	import LinkWrapper from '../../general/linkWrapper.svelte';
+
 	export let date: string;
 	export let title: string;
 	export let description: string;
@@ -10,7 +12,7 @@
 	<div class="flex justify-between">
 		<div class="pr-8">
 			<h4 class="text-xl font-semibold mb-4">{title}</h4>
-			<p>{description}</p>
+			<LinkWrapper text={description} />
 		</div>
 		{#if img}
 			<img class="rounded-lg h-full" src={img} alt="blyaat" />

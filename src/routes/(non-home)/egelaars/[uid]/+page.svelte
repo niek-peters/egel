@@ -15,6 +15,7 @@
 	import { reloadPosts } from '../../../../stores/posts';
 	import { postsStore } from '../../../../stores/posts';
 
+	import LinkWrapper from '../../../../components/general/linkWrapper.svelte';
 	import LgCard from '../../../../components/general/cards/lgCard.svelte';
 	import PfPic from '../../../../components/user/pfPic.svelte';
 	import Line from '../../../../components/general/line.svelte';
@@ -102,7 +103,7 @@
 					{#if user.bio}
 						<div>
 							<h3 class="font-semibold">Over mij:</h3>
-							<p>{user.bio}</p>
+							<LinkWrapper text={user.bio} />
 						</div>
 					{/if}
 					{#if user.bio && user.groups}

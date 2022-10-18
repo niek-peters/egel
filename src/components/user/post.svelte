@@ -8,6 +8,8 @@
 	import { authStore } from '../../stores/auth';
 	import { page } from '$app/stores';
 
+	import LinkWrapper from '../general/linkWrapper.svelte';
+
 	export let uid: string;
 	export let title: string;
 	export let description: string;
@@ -44,7 +46,7 @@
 		<h4 class="text-lg font-semibold my-2">{title}</h4>
 	{/if}
 	{#if description}
-		<p class="text-lg">{description}</p>
+		<LinkWrapper text={description} styles="text-lg" />
 	{/if}
 	{#if $authStore.user != null && $page.params.uid == $authStore.user.uid}
 		<button on:click={processDelete}>

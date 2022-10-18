@@ -28,7 +28,8 @@
 	});
 
 	function focusSlider() {
-		slider.focus({ preventScroll: true });
+		console.log('focused');
+		if (slider) slider.focus({ preventScroll: true });
 	}
 
 	let events: Event[] = [];
