@@ -38,6 +38,18 @@
 		other.classList.remove('text-gray-500');
 		other.classList.add('text-gray-200');
 
+		const images = document.getElementsByClassName('image');
+		[...images].forEach((image) => {
+			console.log(image);
+			image.classList.remove('opacity-100');
+			image.classList.add('opacity-0');
+		});
+
+		const currentImage = document.getElementById(`image${current}`);
+		console.log(currentImage);
+		currentImage?.classList.remove('opacity-0');
+		currentImage?.classList.add('opacity-100');
+
 		setTimeout(() => {
 			title.classList.remove('text-gray-200');
 			description.classList.remove('text-gray-200');
@@ -114,11 +126,14 @@
 				<Fa icon={faAngleLeft} class="text-4xl mx-8" />
 			</button>
 			<!-- {#each [news[current].image] as src (current)} -->
-			<img
-				class="absolute aspect-video w-full h-full object-cover"
-				src={news[current].image}
-				alt="Nieuwsfoto"
-			/>
+			{#each news as item, i}
+				<img
+					class="image absolute aspect-video w-full h-full object-cover transition"
+					src={item.image}
+					id={`image${i}`}
+					alt="Nieuwsfoto"
+				/>
+			{/each}
 			<!-- {/each} -->
 			<button
 				class="absolute right-0 h-full text-gray-400 hover:bg-white/10 transition z-10"
@@ -167,8 +182,23 @@
 	</div>
 </section>
 
-<style>
+<style lang="scss">
 	.slider {
 		height: 36rem;
+
+		// .image {
+		// 	/* Fading animation */
+		// 	animation-name: fade;
+		// 	animation-duration: 1.5s;
+		// }
+
+		// @keyframes fade {
+		// 	from {
+		// 		opacity: 0.4;
+		// 	}
+		// 	to {
+		// 		opacity: 1;
+		// 	}
+		// }
 	}
 </style>
