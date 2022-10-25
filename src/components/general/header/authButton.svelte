@@ -12,6 +12,7 @@
 	import { page } from '$app/stores';
 
 	let menuEl: HTMLUListElement;
+	let hidden = true;
 
 	onMount(() => {
 		window.onclick = closeMenu;
@@ -22,6 +23,8 @@
 
 		menuEl.classList.remove('opacity-100');
 		menuEl.classList.add('opacity-0');
+
+		hidden = true;
 	}
 
 	function toggleMenu() {
@@ -29,6 +32,8 @@
 
 		menuEl.classList.toggle('opacity-100');
 		menuEl.classList.toggle('opacity-0');
+
+		hidden = !hidden;
 	}
 </script>
 
@@ -52,30 +57,48 @@
 				{/if}
 			</button>
 			<ul
-				class="absolute flex flex-col items-start w-48 top-14 right-0 bg-gray-200 shadow-md text-black text-lg p-4 rounded-lg opacity-0 transition"
+				class="absolute flex flex-col items-start gap-1 w-48 top-14 right-0 bg-gray-200 shadow-md text-black text-lg p-4 rounded-lg opacity-0 transition"
 				bind:this={menuEl}
 				on:click|stopPropagation
 			>
 				<li
-					class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition"
-					on:click={() => goto(`/egelaars/${$authStore.user.uid}`)}
-					on:click={closeMenu}
+					class={`flex items-center hover:text-gray-600 transition ${
+						!hidden ? ' cursor-pointer' : 'cursor-default'
+					}`}
+					on:click={() => {
+						if (!hidden) {
+							goto(`/egelaars/${$authStore.user?.uid}`);
+							closeMenu();
+						}
+					}}
 				>
 					<div class="w-8 flex justify-center"><Fa icon={faUser} class="mr-3" /></div>
 					Mijn Profiel
 				</li>
 				<li
-					class="flex items-center cursor-pointer mb-1 hover:text-gray-600 transition"
-					on:click={() => goto('/mijn-account')}
-					on:click={closeMenu}
+					class={`flex items-center hover:text-gray-600 transition ${
+						!hidden ? ' cursor-pointer' : 'cursor-default'
+					}`}
+					on:click={() => {
+						if (!hidden) {
+							goto('/mijn-account');
+							closeMenu();
+						}
+					}}
 				>
 					<div class="w-8 flex justify-center"><Fa icon={faGear} class="mr-3" /></div>
 					Instellingen
 				</li>
 				<li
-					class="flex items-center cursor-pointer hover:text-gray-600 transition"
-					on:click|preventDefault={() => logout($page.routeId || '/')}
-					on:click={closeMenu}
+					class={`flex items-center hover:text-gray-600 transition ${
+						!hidden ? ' cursor-pointer' : 'cursor-default'
+					}`}
+					on:click={() => {
+						if (!hidden) {
+							logout($page.routeId || '/');
+							closeMenu();
+						}
+					}}
 				>
 					<div class="w-8 flex justify-center">
 						<Fa icon={faArrowRightFromBracket} class="mr-3" />

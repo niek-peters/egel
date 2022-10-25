@@ -4,6 +4,7 @@
 	// import { fade } from 'svelte/transition';
 
 	import { onMount } from 'svelte';
+	import type { NewsItem } from '../../models/news';
 
 	let current = 0;
 	let timer: NodeJS.Timer;
@@ -30,11 +31,11 @@
 	}
 
 	function cycleNext() {
-		cycleTo((current + 1) % news.length);
+		cycleTo((current + 1) % newsItems.length);
 	}
 
 	function cyclePrevious() {
-		cycleTo((current - 1 + news.length) % news.length);
+		cycleTo((current - 1 + newsItems.length) % newsItems.length);
 	}
 
 	function animateCycle(index: number) {
@@ -59,12 +60,16 @@
 		const images = document.getElementsByClassName('image');
 		[...images].forEach((image) => {
 			// console.log(image.id, image);
+			image?.classList.remove('z-10');
+			image?.classList.add('z-0');
 			image?.classList.remove('opacity-100');
 			image?.classList.add('opacity-0');
 		});
 
 		const currentImage = document.getElementById(`image${index}`);
 		// console.log('currentImage', currentImage);
+		currentImage?.classList.remove('z-0');
+		currentImage?.classList.add('z-10');
 		currentImage?.classList.remove('opacity-0');
 		currentImage?.classList.add('opacity-100');
 	}
@@ -81,18 +86,9 @@
 		});
 	});
 
-	type newsItem = {
-		title: string;
-		description: string;
-		date: string;
-		location: string;
-		author: string;
-		authorId: string;
-		image: string;
-	};
-
-	const news: newsItem[] = [
+	const newsItems: NewsItem[] = [
 		{
+			uid: '_0',
 			title: 'Catastrofaal snuifincident Stalingrad',
 			description:
 				'Morgen, bij de Toren van Pizza, heeft er een catastrofaal snuifincident plaatsgevonden. De oorzaak van dit ongeval is nog onbekend. We verwachten de uitslag spoedig, want Mortis zit in ons team. Er zijn 22 doden gevallen en 1 persoon kan niet meer snuiven. Verwacht wordt dat Trotski een handje heeft gehad in het incident.',
@@ -103,6 +99,7 @@
 			image: '/snuifincident.jpg'
 		},
 		{
+			uid: '_1',
 			title: 'Covalentie van barium flink gestegen',
 			description:
 				'Nieuw onderzoek toont aan dat de covalentie van barium recent is gestegen. Een internationaal onderzoek dat begin September is begonnen toont aan dat de covalentie van barium in 2020 is gestegen. De gevolgen van dit fenomeen zijn op dit moment nog onbekend. Wel wordt verwacht dat het snuifgevaar van bijvoorbeeld cocaïne in verband met de reinfactor en de lengte van de tijd drastisch is gedaald.',
@@ -113,6 +110,7 @@
 			image: '/barium.jpg'
 		},
 		{
+			uid: '_2',
 			title: "Professor G. Brock ontdekt medicijn tegen Jezusn't",
 			description:
 				"Professor Gnocchi Brock, zoon van prof. Knokker Brock, die werkt bij het KNIL (Koninklijk Nederlands Instituut Longboarden) en EGEL (het Engelse Giga-School Egel Laboratorium), heeft per 6 uur 's ochtends op 2 Januari 2021 een methode ontdekt waarmee een medicijn tegen Jezusn't gemaakt kan worden.",
@@ -126,7 +124,7 @@
 </script>
 
 <section
-	class="slider flex justify-between rounded-lg 2xl:w-4/5 sm:w-10/12 my-12 bg-gray-200 overflow-hidden"
+	class="slider flex justify-between rounded-lg 2xl:w-4/5 sm:w-10/12 my-12 shadow-lg bg-gray-200 overflow-hidden"
 >
 	<div class="flex w-full h-full">
 		<div class="relative flex items-center w-2/3">
@@ -137,16 +135,19 @@
 				<Fa icon={faAngleLeft} class="text-4xl mx-8" />
 			</button>
 			<!-- {#each [news[current].image] as src (current)} -->
-			{#each news as item, i}
-				<img
-					class={`image absolute aspect-video w-full h-full object-cover long-transition ${
-						i == 0 ? 'opacity-100' : 'opacity-0'
-					}`}
-					src={item.image}
-					id={`image${i}`}
-					alt="Nieuwsfoto"
-				/>
-			{/each}
+
+			<a class="absolute w-full h-full overflow-hidden" href={`/nieuws/${newsItems[current].uid}`}>
+				{#each newsItems as item, i}
+					<img
+						class={`image absolute aspect-video w-full h-full object-cover long-transition ${
+							i == 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'
+						} hover:scale-105`}
+						src={item.image}
+						id={`image${i}`}
+						alt="Nieuwsfoto"
+					/>
+				{/each}
+			</a>
 			<!-- {/each} -->
 			<button
 				class="absolute right-0 h-full text-gray-400 hover:bg-white/10 transition z-10"
@@ -176,19 +177,21 @@
 					on:click={() => cycleTo(2)}
 				/>
 			</div>
-			<h2
-				bind:this={title}
-				class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3 transition"
+			<a href={`/nieuws/${newsItems[current].uid}`}
+				><h2
+					bind:this={title}
+					class="text-4xl font-semibold mb-4 border-b border-gray-300 pb-3 transition"
+				>
+					{newsItems[current].title}
+				</h2></a
 			>
-				{news[current].title}
-			</h2>
-			<p class="transition text-lg" bind:this={description}>{news[current].description}</p>
+			<p class="transition text-lg" bind:this={description}>{newsItems[current].description}</p>
 			<div class="flex flex-col mt-auto text-gray-500 transition" bind:this={other}>
 				<p class="text-lg font-semibold">
-					{news[current].location} | {news[current].date}
+					{newsItems[current].location} | {newsItems[current].date}
 				</p>
-				<a href={`/egelaars/${news[current].authorId}`} class="text-lg hover:underline"
-					>{news[current].author}</a
+				<a href={`/egelaars/${newsItems[current].authorId}`} class="text-lg hover:underline"
+					>{newsItems[current].author}</a
 				>
 			</div>
 		</article>
@@ -203,7 +206,7 @@
 			transition-property: color, background-color, border-color, text-decoration-color, fill,
 				stroke, opacity, box-shadow, transform, filter, backdrop-filter;
 			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-			transition-duration: 750ms;
+			transition-duration: 500ms;
 		}
 	}
 </style>
