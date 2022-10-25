@@ -129,7 +129,7 @@
 	<div class="flex w-full h-full">
 		<div class="relative flex items-center w-2/3">
 			<button
-				class="absolute h-full text-gray-400 hover:bg-white/10 transition z-10"
+				class="absolute h-full text-gray-400 hover:bg-white/10 transition z-20"
 				on:click={cyclePrevious}
 			>
 				<Fa icon={faAngleLeft} class="text-4xl mx-8" />
@@ -150,7 +150,7 @@
 			</a>
 			<!-- {/each} -->
 			<button
-				class="absolute right-0 h-full text-gray-400 hover:bg-white/10 transition z-10"
+				class="absolute right-0 h-full text-gray-400 hover:bg-white/10 transition z-20"
 				on:click={cycleNext}
 			>
 				<Fa icon={faAngleRight} class="text-4xl mx-8" />
