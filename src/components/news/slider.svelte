@@ -8,19 +8,24 @@
 	let current = 0;
 	let timer: NodeJS.Timer;
 	let interval = 8000;
+	let cycling = false;
 
 	let title: HTMLHeadingElement;
 	let description: HTMLParagraphElement;
 	let other: HTMLDivElement;
 
 	function cycleTo(index: number) {
+		if (cycling) return;
+		cycling = true;
+
 		clearTimeout(timer);
 		timer = setTimeout(cycleNext, interval);
 
-		animateCycle();
+		animateCycle(index);
 
 		setTimeout(() => {
 			current = index;
+			cycling = false;
 		}, 150);
 	}
 
@@ -32,23 +37,15 @@
 		cycleTo((current - 1 + news.length) % news.length);
 	}
 
-	function animateCycle() {
+	function animateCycle(index: number) {
+		if (!title || !description || !other) return;
+
 		title.classList.add('text-gray-200');
 		description.classList.add('text-gray-200');
 		other.classList.remove('text-gray-500');
 		other.classList.add('text-gray-200');
 
-		const images = document.getElementsByClassName('image');
-		[...images].forEach((image) => {
-			console.log(image);
-			image.classList.remove('opacity-100');
-			image.classList.add('opacity-0');
-		});
-
-		const currentImage = document.getElementById(`image${current}`);
-		console.log(currentImage);
-		currentImage?.classList.remove('opacity-0');
-		currentImage?.classList.add('opacity-100');
+		cycleToImage(index);
 
 		setTimeout(() => {
 			title.classList.remove('text-gray-200');
@@ -56,6 +53,20 @@
 			other.classList.remove('text-gray-200');
 			other.classList.add('text-gray-500');
 		}, 150);
+	}
+
+	function cycleToImage(index: number) {
+		const images = document.getElementsByClassName('image');
+		[...images].forEach((image) => {
+			// console.log(image.id, image);
+			image?.classList.remove('opacity-100');
+			image?.classList.add('opacity-0');
+		});
+
+		const currentImage = document.getElementById(`image${index}`);
+		// console.log('currentImage', currentImage);
+		currentImage?.classList.remove('opacity-0');
+		currentImage?.classList.add('opacity-100');
 	}
 
 	onMount(() => {
@@ -128,7 +139,9 @@
 			<!-- {#each [news[current].image] as src (current)} -->
 			{#each news as item, i}
 				<img
-					class="image absolute aspect-video w-full h-full object-cover transition"
+					class={`image absolute aspect-video w-full h-full object-cover long-transition ${
+						i == 0 ? 'opacity-100' : 'opacity-0'
+					}`}
 					src={item.image}
 					id={`image${i}`}
 					alt="Nieuwsfoto"
@@ -186,19 +199,11 @@
 	.slider {
 		height: 36rem;
 
-		// .image {
-		// 	/* Fading animation */
-		// 	animation-name: fade;
-		// 	animation-duration: 1.5s;
-		// }
-
-		// @keyframes fade {
-		// 	from {
-		// 		opacity: 0.4;
-		// 	}
-		// 	to {
-		// 		opacity: 1;
-		// 	}
-		// }
+		.long-transition {
+			transition-property: color, background-color, border-color, text-decoration-color, fill,
+				stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+			transition-duration: 750ms;
+		}
 	}
 </style>
