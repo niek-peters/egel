@@ -2,7 +2,6 @@
 	import Fa from 'svelte-fa';
 	import { faCheckCircle, faClock } from '@fortawesome/free-regular-svg-icons';
 	import { faGamepad, faPaintBrush, faPerson } from '@fortawesome/free-solid-svg-icons';
-	import { faYoutube, faTwitter, faReddit, faGithub } from '@fortawesome/free-brands-svg-icons';
 	import { Circle } from 'svelte-loading-spinners/src';
 
 	import { page } from '$app/stores';
@@ -22,6 +21,7 @@
 	import WideLine from '../../../../components/general/wideLine.svelte';
 	import Gallery from '../../../../components/user/gallery.svelte';
 	import NewPost from '../../../../components/user/newPost.svelte';
+	import LinksList from '../../../../components/user/linksList.svelte';
 
 	let user: UserDB;
 	let myProfile = false;
@@ -73,30 +73,7 @@
 							<b>{user.username}</b>
 						</h2>
 
-						{#if user.links}
-							<div class="flex justify-center w-3/5 gap-2">
-								{#if user.links.youtube}
-									<a href={user.links.youtube} target="_blank">
-										<Fa icon={faYoutube} class="text-2xl text-red-500" />
-									</a>
-								{/if}
-								{#if user.links.reddit}
-									<a href={user.links.reddit} target="_blank">
-										<Fa icon={faReddit} class="text-2xl text-orange-600" />
-									</a>
-								{/if}
-								{#if user.links.twitter}
-									<a href={user.links.twitter} target="_blank">
-										<Fa icon={faTwitter} class="text-2xl text-blue-400" />
-									</a>
-								{/if}
-								{#if user.links.github}
-									<a href={user.links.github} target="_blank">
-										<Fa icon={faGithub} class="text-2xl text-gray-800" />
-									</a>
-								{/if}
-							</div>
-						{/if}
+						<LinksList links={user.links} />
 					</div>
 				</div>
 				<div class="flex flex-col w-7/12 pt-6">
@@ -184,8 +161,29 @@
 	{/if}
 </LgCard>
 
-<style>
+<style lang="scss">
 	.wrapper {
 		min-height: 31rem;
+
+		.accepted {
+			&::after {
+				content: 'Erkend Egel lid';
+				position: absolute;
+				display: flex;
+				justify-content: center;
+				top: -3.25rem;
+				font-size: 1rem;
+				white-space: nowrap;
+				border-radius: 0.5rem;
+				width: 8rem;
+				background-color: rgb(209 213 219);
+				opacity: 0;
+				transition: opacity 150ms ease;
+			}
+
+			&:hover::after {
+				opacity: 1;
+			}
+		}
 	}
 </style>
